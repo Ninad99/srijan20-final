@@ -1,0 +1,39 @@
+.navigation {
+  padding: 0 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.dashboard-sider {
+  height: 92vh;
+  padding: 2rem 0;
+}
+
+.appdrawer-icon {
+  display: none;
+  color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  padding: .5rem;
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-sider {
+    display: none;
+  }
+
+  .appdrawer-icon {
+    display: inline-block;
+  }
+
+  .nav-brand {
+    display: none;
+  }
+}
