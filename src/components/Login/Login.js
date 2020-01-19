@@ -16,10 +16,15 @@ const Login = props => {
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleGoogleSignIn = () => {
-    console.log('clicked');
     const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  }
+
+  const handleFacebookSignIn = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithRedirect(provider);
   }
 
@@ -29,12 +34,14 @@ const Login = props => {
       setIsLoading(false);
       history.push('/app');
     } catch (err) {
-      console.log(err);
+      setError(err);
+      setIsLoading(false);
     }
   }, [history]);
 
   const handleSubmit = useCallback(e => {
     e.preventDefault();
+    setError(null);
     setIsLoading(true);
     const { email, password } = e.target.elements;
     if (isValid(email.value, password.value)) {
@@ -51,6 +58,8 @@ const Login = props => {
       <Form onSubmit={handleSubmit} className="login-form">
         <h1>Login</h1>
         {formError ? <Alert message="Invalid email or password!" type="error" /> : null}
+        {error ? <Alert message={error.message} type="error" /> : null}
+        <br />
         <Form.Item>
           <Input name="email" prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
         </Form.Item>
@@ -68,9 +77,9 @@ const Login = props => {
         <div className="altSignIn" onClick={handleGoogleSignIn}>
           <Icon type="google" /> Sign In with Google
         </div>
-        <div className="altSignIn">
+        <div className="altSignIn" onClick={handleFacebookSignIn}>
           <Icon type="facebook" /> Sign In with Facebook
-        </div>
+        </div> 
       </Form>
     </section>
   );

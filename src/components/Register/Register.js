@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Form, Icon, Input, Button, Checkbox, Alert, Spin, Select, InputNumber } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Alert, Spin } from 'antd';
 import firebase from '../../firebase/config';
 import './Register.css';
 
@@ -16,6 +16,7 @@ const Register = props => {
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleGoogleSignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -28,16 +29,18 @@ const Register = props => {
   const handleRegister = useCallback(async (userName, email, password, year, department) => {
     try {
       const userCredentials = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      writeUserData(userCredentials.user.uid, userName, email);
+      writeUserData(userCredentials.user.uid, userName, email, year, department);
       setIsLoading(false);
       history.push('/app');
     } catch (err) {
-      console.log(err);
+      setError(err);
+      setIsLoading(false);
     }
   }, [history, writeUserData]);
 
   const handleSubmit = useCallback(e => {
     e.preventDefault();
+    setError(null);
     setIsLoading(true);
     const { username, email, password, year, department } = e.target.elements;
     if (isValid(email.value, password.value)) {
@@ -54,11 +57,15 @@ const Register = props => {
       <Form onSubmit={handleSubmit} className="register-form">
         <h1>Register</h1>
         {formError ? <Alert message="Invalid email or password!" type="error" /> : null}
+        {error ? <Alert message={error.message} type="error" /> : null}
+        <br />
         <Form.Item>
-          <Input name="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+          <Input name="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Name" />
         </Form.Item>
         <Form.Item>
-          <InputNumber name="year" type="number" min={1} max={4} prefix={<Icon type="read" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Year" />
+          <Input name="year" type="number" min={1} max={4} prefix={<Icon type="read" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Year" />
+        </Form.Item>
+        <Form.Item>
           <Input name="department" prefix={<Icon type="solution" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Department" />
         </Form.Item>
         <Form.Item>
@@ -80,7 +87,7 @@ const Register = props => {
         </div>
         <div className="altSignIn" onClick={handleFacebookSignIn}>
           <Icon type="facebook" /> Sign In with Facebook
-        </div>
+        </div> 
       </Form>
     </section>
   );
