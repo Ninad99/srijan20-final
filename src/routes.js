@@ -10,36 +10,43 @@ export const routes = [
   {
     path: '/dashboard',
     component: DashboardPage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Dashboard'
   },
   {
     path: '/events',
     component: EventsPage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Event'
   },
   {
     path: '/merchandise',
     component: MerchandisePage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Merchandise'
   },
   {
     path: '/talks',
     component: TalksPage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Talks'
   },
   {
     path: '/team',
     component: TeamPage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Team'
   },
   {
     path: '/technofries',
     component: TechnofriesPage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Technofries'
   },
   {
     path: '/workshops',
     component: WorkshopsPage,
-    layout: '/app'
+    layout: '/app',
+    routeName: 'Workshops'
   },
 ];
