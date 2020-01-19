@@ -16,19 +16,20 @@ const AuthContextProvider = props => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      setCurrentUser(user);
-      firebase.auth().getRedirectResult()
-        .then(result => {
-          console.log(result);
-          if (result.user && result.additionalUserInfo.isNewUser) {
-            const user = result.user;
-            writeUserData(user.uid, user.displayName, user.email, 'unset', 'unset');
-          }
-        })
-        .catch(err => console.log(err))
-    });
+    firebase.auth().onAuthStateChanged(setCurrentUser);
   }, [])
+
+  useEffect(() => {
+    firebase.auth().getRedirectResult()
+      .then(result => {
+        console.log('[authContext] redirect result: ', result);
+        if (result.user && result.additionalUserInfo.isNewUser) {
+          const user = result.user;
+          writeUserData(user.uid, user.displayName, user.email, 'unset', 'unset');
+        }
+      })
+      .catch(err => console.log(err))
+  }, [currentUser])
 
   return (
     <AuthContext.Provider value={{ currentUser: currentUser }}>
