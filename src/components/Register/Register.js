@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Form, Icon, Input, Button, Checkbox, Alert, Spin } from 'antd';
 import firebase from '../../firebase/config';
+import { writeUserData } from '../../firebase/utility';
 import './Register.css';
 
 const isValid = (email, passwd) => {
@@ -12,7 +13,7 @@ const isValid = (email, passwd) => {
 }
 
 const Register = props => {
-  const { history, writeUserData } = props;
+  const { history } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,25 +24,25 @@ const Register = props => {
     firebase.auth().signInWithRedirect(provider);
   }
 
-  const handleRegister = useCallback(async (userName, email, password, year, department) => {
+  const handleRegister = useCallback(async (userName, email, password, year, department, college) => {
     try {
       const userCredentials = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      writeUserData(userCredentials.user.uid, userName, email, year, department);
+      writeUserData(userCredentials.user.uid, userName, email, year, department, college);
       setIsLoading(false);
       history.push('/app');
     } catch (err) {
       setError(err);
       setIsLoading(false);
     }
-  }, [history, writeUserData]);
+  }, [history]);
 
   const handleSubmit = useCallback(e => {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
-    const { username, email, password, year, department } = e.target.elements;
+    const { username, email, password, year, department, college } = e.target.elements;
     if (isValid(email.value, password.value)) {
-      handleRegister(username.value, email.value, password.value, year.value, department.value);
+      handleRegister(username.value, email.value, password.value, year.value, department.value, college.value);
       setFormError(false);
     } else {
       setFormError(true);
@@ -57,13 +58,30 @@ const Register = props => {
         {error ? <Alert message={error.message} type="error" /> : null}
         <br />
         <Form.Item>
-          <Input name="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Name" />
+          <Input
+            name="username"
+            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Name" />
         </Form.Item>
         <Form.Item>
-          <Input name="year" type="number" min={1} max={4} prefix={<Icon type="read" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Year" />
+          <Input
+            name="college"
+            prefix={<Icon type="book" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="College" />
         </Form.Item>
         <Form.Item>
-          <Input name="department" prefix={<Icon type="solution" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Department" />
+          <Input
+            name="department"
+            prefix={<Icon type="solution" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Department" />
+        </Form.Item>
+        <Form.Item>
+          <Input
+            name="year"
+            type="number"
+            min={1} max={4}
+            prefix={<Icon type="read" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Year" />
         </Form.Item>
         <Form.Item>
           <Input name="email" type="email" prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
