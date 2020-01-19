@@ -1,7 +1,5 @@
 @import '~antd/dist/antd.css';
-@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
 
 .App {
   font-size: 87.5%;
-  font-family: 'Inconsolata', monospace;
 }
