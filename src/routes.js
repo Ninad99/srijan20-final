@@ -5,48 +5,63 @@ import TalksPage from './pages/Talks/Talks';
 import TeamPage from './pages/Team/Team';
 import TechnofriesPage from './pages/Technofries/Technofries';
 import WorkshopsPage from './pages/Workshops/Workshops';
+import ProfilePage from './pages/Profile/Profile';
 
 export const routes = [
   {
     path: '/dashboard',
     component: DashboardPage,
     layout: '/app',
-    routeName: 'Dashboard'
+    routeName: 'Dashboard',
+    icon: 'dashboard'
   },
   {
     path: '/events',
     component: EventsPage,
     layout: '/app',
-    routeName: 'Event'
+    routeName: 'Events',
+    icon: 'schedule'
   },
   {
     path: '/merchandise',
     component: MerchandisePage,
     layout: '/app',
-    routeName: 'Merchandise'
+    routeName: 'Merchandise',
+    icon: 'shopping'
   },
   {
     path: '/talks',
     component: TalksPage,
     layout: '/app',
-    routeName: 'Talks'
+    routeName: 'Talks',
+    icon: 'audio'
   },
   {
     path: '/team',
     component: TeamPage,
     layout: '/app',
-    routeName: 'Team'
+    routeName: 'Team',
+    icon: 'team'
   },
   {
     path: '/technofries',
     component: TechnofriesPage,
     layout: '/app',
-    routeName: 'Technofries'
+    routeName: 'Technofries',
+    icon: 'read'
   },
   {
     path: '/workshops',
     component: WorkshopsPage,
     layout: '/app',
-    routeName: 'Workshops'
+    routeName: 'Workshops',
+    icon: 'crown'
   },
+  {
+    path: '/profile',
+    component: ProfilePage,
+    layout: '/app',
+    routeName: 'Profile',
+    icon: 'database'
+  }
 ];
