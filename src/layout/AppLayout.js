@@ -7,7 +7,6 @@ import './AppLayout.css';
 const { Header, Footer, Sider, Content } = Layout;
 
 const AppLayout = props => {
-  console.log('[AppLayout.js]')
   const { username, handleSignOut } = props;
   const [drawerVisible, setDrawerVisible] = useState(false);
   const onDrawerClose = () => setDrawerVisible(false);
@@ -36,27 +35,13 @@ const AppLayout = props => {
           onClose={onDrawerClose}
           visible={drawerVisible}>
           <Menu mode="inline">
-            <Menu.Item>
-              <Link to="/app/dashboard">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/events">Events</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/merchandise">Merchandise</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/talks">Talks</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/team">Team</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/technofries">Technofries</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/workshops">Workshops</Link>
-            </Menu.Item>
+            {routes.map((route, index) => {
+              return (
+                <Menu.Item key={index} onClick={onDrawerClose}>
+                  <Link to={route.layout + route.path}>{route.routeName}</Link>
+                </Menu.Item>
+              );
+            })}
           </Menu>
       </Drawer>
       <Header className="navigation" style={{ height: '8vh' }} theme="dark">
@@ -69,27 +54,13 @@ const AppLayout = props => {
       <Layout>
         <Sider className="dashboard-sider">
           <Menu theme="dark" mode="inline">
-            <Menu.Item>
-              <Link to="/app/dashboard">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/events">Events</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/merchandise">Merchandise</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/talks">Talks</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/team">Team</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/technofries">Technofries</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/app/workshops">Workshops</Link>
-            </Menu.Item>
+            {routes.map((route, index) => {
+              return (
+                <Menu.Item key={index}>
+                  <Link to={route.layout + route.path}>{route.routeName}</Link>
+                </Menu.Item>
+              );
+            })}
           </Menu>
         </Sider>
         <Layout style={{ overflowY: 'auto' }}>
@@ -99,7 +70,7 @@ const AppLayout = props => {
                 return <Route key={index} path={route.layout + route.path} component={route.component} />
               })}
             </RouteSwitch>
-            <Footer style={{ textAlign: 'center' }}>Srijan 20 Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
+            <Footer style={{ textAlign: 'center' }}><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
           </Content>
         </Layout>
       </Layout>
