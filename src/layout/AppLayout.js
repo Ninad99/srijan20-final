@@ -23,6 +23,7 @@ const AppLayout = props => {
   return (
     <Layout style={{ maxHeight: '100vh' }}>
     <Drawer
+      bodyStyle={{ padding: 0 }}
       title="Srijan 20"
       placement="left"
       closable={true}
@@ -41,7 +42,7 @@ const AppLayout = props => {
         </Menu>
       </Drawer>
       <Header className="navigation" style={{ height: '8vh' }} theme="dark">
-        <Icon type="bars" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
+        <Icon type="menu" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
         <span className="nav-brand">Srijan 20</span>
         <Dropdown.Button overlay={dropdownMenu}>
           <Icon type="user" /> ({username})

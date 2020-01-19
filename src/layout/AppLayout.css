@@ -24,10 +24,7 @@
 .appdrawer-icon {
   display: none;
   color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1.5rem;
-  padding: .5rem;
+  font-size: 1.75rem;
 }
 
 .nav-brand {
