@@ -66,7 +66,7 @@ const App = props => {
 
   return (
     <Switch>
-      <Route path='/' exact component={LandingPage} />
+      <Route path='/' exact render={props => <LandingPage isAuthenticated={isAuthenticated} />} />
       <Route path='/login' exact render={props => <Login {...props} />} />
       <Route path='/register' exact render={props => <Register {...props} writeUserData={writeUserData} />} />
       <PrivateRoute component={AppLayout} path='/app' username={userName} handleSignOut={handleSignOut} />
