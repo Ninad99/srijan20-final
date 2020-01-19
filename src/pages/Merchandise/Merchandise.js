@@ -1,8 +1,10 @@
 import React from 'react';
 
-const Merchandise = props => {
+const Merchandise = () => {
   return (
-    <h1>Merchandise</h1>
+    <div>
+      m
+    </div>
   );
 }
 

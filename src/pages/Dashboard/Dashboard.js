@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useRef, useEffect} from 'react';
 import { Row, Col, Card } from 'antd';
+import Chart from './../../components/Chart/Chart';
 import './Dashboard.css';
+
+
 
 const Dashboard = props => {
   return (
     <section className="dashboard">
-      <Row style={{ background: 'lightblue' }}>
+      <Row >
         <Col md={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
           <Card title="Your registered events" style={{ width: '100%' }}>
             <ul className="custom-carousel">
@@ -47,6 +50,7 @@ const Dashboard = props => {
             </ul>
           </Card>
         </Col>
+
         <Col md={12} style={{ padding: '.5rem', textAlign: 'center' }}>
           <Card title="Your registered workshops" style={{ width: '100%' }}>
           <ul className="custom-carousel">
@@ -86,6 +90,18 @@ const Dashboard = props => {
                 </Card>
               </li>
             </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row >
+        <Col md={16} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
+          <Card title="Your Participation in Srijan 2020" style={{ width: '100%' }}>
+              <Chart></Chart>
+          </Card>
+        </Col>
+        <Col md={8} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
+          <Card title="Your Badge" style={{ width: '100%' }}>
+
           </Card>
         </Col>
       </Row>
