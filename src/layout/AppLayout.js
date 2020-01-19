@@ -4,9 +4,7 @@ import { Layout, Dropdown, Menu, Drawer, Icon, Button } from 'antd';
 import { routes } from '../routes';
 import Particles from 'react-particles-js';
 import './AppLayout.css';
-
 const { Header, Footer, Sider, Content } = Layout;
-
 const AppLayout = props => {
   const { username, handleSignOut } = props;
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -92,11 +90,11 @@ const AppLayout = props => {
       </Header>
       <Layout style={{ background: 'transparent' }}>
         <Sider className="dashboard-sider">
-          <Menu theme="dark" mode="inline" className="dashboard-sider-menu">
+          <Menu mode="inline" className="dashboard-sider-menu">
             {routes.map((route, index) => {
               return (
-                <Menu.Item key={index}>
-                  <Link to={route.layout + route.path}>
+                <Menu.Item className="menuBtn" key={index}>
+                  <Link style={{ borderRight: 'none'}} className="menuBtnLink" to={route.layout + route.path}>
                     <Icon type={route.icon} />{route.routeName}
                   </Link>
                 </Menu.Item>
@@ -111,7 +109,7 @@ const AppLayout = props => {
                 return <Route key={index} path={route.layout + route.path} component={route.component} />
               })}
             </RouteSwitch>
-            <Footer style={{ textAlign: 'center', background: 'rgba(22, 104, 159, 0.2)', color: '#00ebff' }}><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
+            <Footer style={{ textAlign: 'center', background: 'rgba(22, 104, 159, 0.2)', color: '#00ebff', marginLeft: '20px' }}><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
           </Content>
         </Layout>
       </Layout>
