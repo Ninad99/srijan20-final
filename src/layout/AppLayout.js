@@ -13,13 +13,7 @@ const AppLayout = props => {
 
   const dropdownMenu = (
     <Menu>
-      <Menu.Item key="1">
-        <Link to="/app/profile">
-          <Icon type="profile" />&nbsp;
-          Profile
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="2" onClick={handleSignOut}>
+      <Menu.Item key="1" onClick={handleSignOut}>
         <Icon type="logout" />
         Logout
       </Menu.Item>
@@ -28,21 +22,23 @@ const AppLayout = props => {
 
   return (
     <Layout style={{ maxHeight: '100vh' }}>
-      <Drawer
-          title="Srijan 20"
-          placement="left"
-          closable={true}
-          onClose={onDrawerClose}
-          visible={drawerVisible}>
-          <Menu mode="inline">
-            {routes.map((route, index) => {
-              return (
-                <Menu.Item key={index} onClick={onDrawerClose}>
-                  <Link to={route.layout + route.path}>{route.routeName}</Link>
-                </Menu.Item>
-              );
-            })}
-          </Menu>
+    <Drawer
+      title="Srijan 20"
+      placement="left"
+      closable={true}
+      onClose={onDrawerClose}
+      visible={drawerVisible}>
+        <Menu mode="inline">
+          {routes.map((route, index) => {
+            return (
+              <Menu.Item key={index} onClick={onDrawerClose}>
+                <Link to={route.layout + route.path}>
+                  <Icon type={route.icon} />{route.routeName}
+                </Link>
+              </Menu.Item>
+            );
+          })}
+        </Menu>
       </Drawer>
       <Header className="navigation" style={{ height: '8vh' }} theme="dark">
         <Icon type="bars" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
@@ -53,11 +49,13 @@ const AppLayout = props => {
       </Header>
       <Layout>
         <Sider className="dashboard-sider">
-          <Menu theme="dark" mode="inline">
+          <Menu theme="dark" mode="inline" className="dashboard-sider-menu">
             {routes.map((route, index) => {
               return (
                 <Menu.Item key={index}>
-                  <Link to={route.layout + route.path}>{route.routeName}</Link>
+                  <Link to={route.layout + route.path}>
+                    <Icon type={route.icon} />{route.routeName}
+                  </Link>
                 </Menu.Item>
               );
             })}
