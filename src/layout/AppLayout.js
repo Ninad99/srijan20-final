@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Switch as RouteSwitch, Route } from 'react-router-dom';
-import { Layout, Dropdown, Menu, Drawer, Icon } from 'antd';
+import { Layout, Dropdown, Menu, Drawer, Icon, Button } from 'antd';
 import { routes } from '../routes';
 import './AppLayout.css';
 
@@ -43,9 +43,14 @@ const AppLayout = props => {
       <Header className="navigation" style={{ height: '8vh' }} theme="dark">
         <Icon type="bars" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
         <span className="nav-brand">Srijan 20</span>
-        <Dropdown.Button overlay={dropdownMenu}>
+        <span className="nav-right">
+          <Button style={{ marginRight: '20px' }}>
+          <Icon type="shopping-cart" /> 
+          </Button>
+          <Dropdown.Button overlay={dropdownMenu}>
           <Icon type="user" /> ({username})
-        </Dropdown.Button>
+          </Dropdown.Button>
+      </span>
       </Header>
       <Layout>
         <Sider className="dashboard-sider">
