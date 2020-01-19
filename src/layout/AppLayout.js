@@ -99,7 +99,7 @@ const AppLayout = props => {
                 return <Route key={index} path={route.layout + route.path} component={route.component} />
               })}
             </RouteSwitch>
-            <Footer style={{ textAlign: 'center' }}>Srijan 2020 Made with &#9829; by the Srijan Team</Footer>
+            <Footer style={{ textAlign: 'center' }}>Srijan 20 Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
           </Content>
         </Layout>
       </Layout>
