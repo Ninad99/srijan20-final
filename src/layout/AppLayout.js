@@ -109,7 +109,7 @@ const AppLayout = props => {
                 return <Route key={index} path={route.layout + route.path} component={route.component} />
               })}
             </RouteSwitch>
-            <Footer style={{ textAlign: 'center', background: 'rgba(22, 104, 159, 0.2)', color: '#00ebff', marginLeft: '20px' }}><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
+            <Footer className="footer"><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
           </Content>
         </Layout>
       </Layout>

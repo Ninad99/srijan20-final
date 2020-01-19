@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, Button } from 'antd';
+import { Typography } from 'antd';
 import fgimg from '../../assets/Images/fg-landing.png';
 import Particles from 'react-particles-js';
 import './Landing.css';
 
+import LoginForm from '../../components/Login/Login';
+import RegisterForm from '../../components/Register/Register';
+
 const { Title } = Typography;
 
 const Landing = props => {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, username } = props;
+  const [showForm, setShowForm] = useState(null);
+
   return (
     <section className="landing">
       <Particles className="particles"
@@ -48,22 +53,29 @@ const Landing = props => {
         }}
         style={{ height: '100vh', width: '100%' }} />
       <img id="fg-img" className="fgimg" src={ fgimg } alt="landing-fg" />
-      <Title style={{ color: '#fafafa', zIndex: 200 }}>Srijan 20</Title>
-      <div style={{ zIndex: 201 }}>
-        {isAuthenticated ? (
-          <Link to="/app">
-            <Button>Go to Dashboard</Button>
-          </Link>) : (
+      {!showForm ? (<div className="landing-actions">
+        <Title style={{ color: '#fafafa' }} className="landing-actions-heading">Srijan 20</Title>
+        <div className="landing-actions-main">
+          {isAuthenticated ? (
+            <Link to="/app/dashboard">
+              <span className="btn">
+                <p style={{ padding: 0, margin: 0 }}>Go to Dashboard ({username})</p>
+              </span>
+            </Link>) : (
             <>
-              <Link to="/login" style={{ marginRight: '1rem' }}>
-                <span class="btn"><p style={{ padding: 0, margin: 0 }}>Login</p></span>
-              </Link>
-              <Link to="/register">
-                <span class="btn"><p style={{ padding: 0, margin: 0 }}>Register</p></span>
-              </Link>
+              <span className="btn" style={{ marginRight: '1rem' }} onClick={e => setShowForm('login')}>
+                <p style={{ padding: 0, margin: 0 }}>Login</p>
+              </span>
+              <span className="btn" onClick={e => setShowForm('register')}>
+                <p style={{ padding: 0, margin: 0 }}>Register</p>
+              </span>
             </>
           )}
-      </div>
+        </div>
+      </div>) : null}
+      {showForm === 'login' ? <LoginForm setShowForm={setShowForm} /> : (
+        showForm === 'register' ? <RegisterForm setShowForm={setShowForm} /> : null
+      )}
     </section>
   )
 }

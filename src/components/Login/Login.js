@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Form, Icon, Input, Button, Checkbox, Alert, Spin } from 'antd';
 import firebase from '../../firebase/config';
 import './Login.css';
@@ -12,7 +12,7 @@ const isValid = (email, passwd) => {
 }
 
 const Login = props => {
-  const { history } = props;
+  const { history, setShowForm } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,7 @@ const Login = props => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       setIsLoading(false);
-      history.push('/app');
+      history.push('/app/dashboard');
     } catch (err) {
       setError(err);
       setIsLoading(false);
@@ -54,34 +54,32 @@ const Login = props => {
   }, [handleSignIn]);
 
   return (
-    <section className="login">
-      <Form onSubmit={handleSubmit} className="login-form">
-        <h1>Login</h1>
-        {formError ? <Alert message="Invalid email or password!" type="error" /> : null}
-        {error ? <Alert message={error.message} type="error" /> : null}
-        <br />
-        <Form.Item>
-          <Input name="email" prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-        </Form.Item>
-        <Form.Item>
-          <Input name="password" type={showPassword ? "text" : "password"} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Password" />
-          <Checkbox onChange={e => setShowPassword(!showPassword)}>Show Password</Checkbox>
-        </Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
-        </Button>&nbsp;&nbsp;&nbsp;
-        {isLoading ? <Spin /> : null}
-        <br /><br />
-        <Link to="/register">Create an account</Link>
-        <hr />
-        <div className="altSignIn" onClick={handleGoogleSignIn}>
-          <Icon type="google" /> Sign In with Google
-        </div>
-        <div className="altSignIn" onClick={handleFacebookSignIn}>
-          <Icon type="facebook" /> Sign In with Facebook
-        </div> 
-      </Form>
-    </section>
+    <Form onSubmit={handleSubmit} className="login-form">
+      <h1>Srijan 20 | Login</h1>
+      {formError ? <Alert message="Invalid email or password!" type="error" /> : null}
+      {error ? <Alert message={error.message} type="error" /> : null}
+      <hr /><br />
+      <Form.Item>
+        <Input className="input" name="email" prefix={<Icon type="mail" style={{ color: 'rgba(255,255,255,.7)' }} />} placeholder="Email" />
+      </Form.Item>
+      <Form.Item>
+        <Input name="password" type={showPassword ? "text" : "password"} prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,.7)' }} />} placeholder="Password" />
+        <Checkbox onChange={e => setShowPassword(!showPassword)}>Show Password</Checkbox>
+      </Form.Item>
+      <Button htmlType="submit" style={{ background: 'transparent', color: '#fafafa' }}>
+        Login
+      </Button>&nbsp;&nbsp;&nbsp;
+      {isLoading ? <Spin /> : null}
+      <br /><br />
+      <span className="mock-form-link" onClick={e => setShowForm('register')}>Create an account</span>
+      <hr />
+      <div className="altSignIn" onClick={handleGoogleSignIn}>
+        <Icon type="google" /> Sign In with Google
+      </div>
+      <div className="altSignIn" onClick={handleFacebookSignIn}>
+        <Icon type="facebook" /> Sign In with Facebook
+      </div> 
+    </Form>
   );
 } 
 

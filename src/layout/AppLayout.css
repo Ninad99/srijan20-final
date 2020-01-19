@@ -162,3 +162,9 @@ border: none!important;
   color: #00ebff;
 }
 
+.footer {
+  text-align: center;
+  background: rgba(22, 104, 159, .2);
+  color: #00ebff;
+  margin: .5rem;
+}
