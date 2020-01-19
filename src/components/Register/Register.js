@@ -24,6 +24,11 @@ const Register = props => {
     firebase.auth().signInWithRedirect(provider);
   }
 
+  const handleFacebookSignIn = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  }
+
   const handleRegister = useCallback(async (userName, email, password, year, department, college) => {
     try {
       const userCredentials = await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -100,9 +105,9 @@ const Register = props => {
         <div className="altSignIn" onClick={handleGoogleSignIn}>
           <Icon type="google" /> Sign In with Google
         </div>
-        {/* <div className="altSignIn">
+        <div className="altSignIn" onClick={handleFacebookSignIn}>
           <Icon type="facebook" /> Sign In with Facebook
-        </div> */}
+        </div> 
       </Form>
     </section>
   );
