@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Polar} from 'react-chartjs-2';
+import { Polar } from 'react-chartjs-2';
 
 const data = {
   datasets: [{
@@ -17,8 +17,7 @@ const data = {
       '#FFCE56',
       '#E7E9ED',
       '#36A2EB'
-    ],
-    label: 'My dataset' // for legend
+    ]
   }],
   labels: [
     'Event Participation',
@@ -33,9 +32,12 @@ const data = {
 const Chart = () => {
 
   return (
-    <div>
-    <Polar data={data} />
-  </div>
+    <Polar data={data} legend={{
+        position: 'right', 
+        labels: {
+          fontSize: 10
+        }
+      }} />
   )
 }
 

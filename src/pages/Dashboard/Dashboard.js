@@ -1,9 +1,7 @@
-import React, { useRef, useEffect} from 'react';
+import React from 'react';
 import { Row, Col, Card } from 'antd';
 import Chart from './../../components/Chart/Chart';
 import './Dashboard.css';
-
-
 
 const Dashboard = props => {
   return (
@@ -94,12 +92,12 @@ const Dashboard = props => {
         </Col>
       </Row>
       <Row >
-        <Col md={16} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
+        <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
           <Card title="Your Participation in Srijan 2020" style={{ width: '100%' }}>
               <Chart></Chart>
           </Card>
         </Col>
-        <Col md={8} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
+        <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
           <Card title="Your Badge" style={{ width: '100%' }}>
 
           </Card>

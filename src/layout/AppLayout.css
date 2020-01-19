@@ -4,11 +4,21 @@
   justify-content: space-between;
   align-items: center;
   color: white;
+  background: #000046;
+  background: -webkit-linear-gradient(to left, rgb(28, 151, 184) 10%, #000046 90%);
+  background: linear-gradient(to left, rgb(28, 151, 184) 10%, #000046 90%);
 }
 
 .dashboard-sider {
   height: 92vh;
   padding: 2rem 0;
+  background: #000046;
+  background: -webkit-linear-gradient(to top, rgb(28, 151, 184), #000046);
+  background: linear-gradient(to top, rgb(28, 151, 184), #000046);
+}
+
+.dashboard-sider-menu {
+  background: transparent;
 }
 
 .appdrawer-icon {
