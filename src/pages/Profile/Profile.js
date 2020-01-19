@@ -15,12 +15,10 @@ const Profile = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const { username, email, year, college, department } = e.target.elements;
-    console.log(username.value)
     writeUserData(currentUser.uid, username.value, email.value, year.value, department.value, college.value);
     notification['success']({
       message: 'Success!',
-      description:
-        'Your profile has been updated!',
+      description: 'Your profile has been updated!',
       duration: 2
     })
   }
