@@ -32,7 +32,7 @@ const Login = props => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       setIsLoading(false);
-      history.push('/app');
+      history.push('/app/dashboard');
     } catch (err) {
       setError(err);
       setIsLoading(false);

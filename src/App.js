@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { Switch, Route, withRouter, } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect, } from 'react-router-dom';
 import './App.css';
 import firebase from './firebase/config';
 import { AuthContext } from './context/authContext';
@@ -8,8 +8,6 @@ import { getUsernameFromDatabase } from './firebase/utility';
 import PrivateRoute from './hoc/PrivateRoute';
 import LandingPage from './pages/Landing/Landing';
 import AppLayout from './layout/AppLayout';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
 
 const App = props => {
   const { history } = props;
@@ -22,10 +20,9 @@ const App = props => {
       console.log(currentUser);
       getUsernameFromDatabase(currentUser.uid)
         .then(usr => {
-          console.log(usr);
           setUserName(usr);
           setIsAuthenticated(true);
-          history.push('/app');
+          // history.push('/app/dashboard');
         })
         .catch(err => console.log(err));
     } else {
@@ -47,10 +44,9 @@ const App = props => {
 
   return (
     <Switch>
-      <Route path='/' exact render={props => <LandingPage isAuthenticated={isAuthenticated} />} />
-      <Route path='/login' exact render={props => <Login {...props} />} />
-      <Route path='/register' exact render={props => <Register {...props} />} />
+      <Route path='/' exact render={props => <LandingPage isAuthenticated={isAuthenticated} username={userName} />} />
       <PrivateRoute component={AppLayout} path='/app' username={userName} handleSignOut={handleSignOut} />
+      <Redirect from='*' to='/' />
     </Switch>
   );
 }

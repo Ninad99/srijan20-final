@@ -34,7 +34,7 @@ const Register = props => {
       const userCredentials = await firebase.auth().createUserWithEmailAndPassword(email, password);
       writeUserData(userCredentials.user.uid, userName, email, year, department, college);
       setIsLoading(false);
-      history.push('/app');
+      history.push('/app/dashboard');
     } catch (err) {
       setError(err);
       setIsLoading(false);
