@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import firebase, { db } from '../firebase/config';
-
-const writeUserData = (userId, userName, email, year, department) => {
-  db.ref('users/' + userId).set({
-    username: userName,
-    email: email,
-    year: year,
-    department: department
-  });
-}
+import firebase from '../firebase/config';
+import { writeUserData } from '../firebase/utility';
 
 export const AuthContext = React.createContext({ currentUser: null });
 
@@ -25,7 +17,7 @@ const AuthContextProvider = props => {
         console.log('[authContext] redirect result: ', result);
         if (result.user && result.additionalUserInfo.isNewUser) {
           const user = result.user;
-          writeUserData(user.uid, user.displayName, user.email, 'unset', 'unset');
+          writeUserData(user.uid, user.displayName, user.email, 'unset', 'unset', 'unset');
         }
       })
       .catch(err => console.log(err))
