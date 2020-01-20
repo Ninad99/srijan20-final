@@ -12,17 +12,17 @@
 }
 
 .custom-carousel::-webkit-scrollbar {
-  width: 7px;
+ width: 1px;
 }
 
 .custom-carousel::-webkit-scrollbar-thumb {
-  background-color: #999;
+  background-color: rgba(0,0,0,0.2);
   border-radius: 10px;
 }
 
 .custom-carousel::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  /* box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
 }
 
 .custom-carousel-item:not(:last-child) {
@@ -32,4 +32,17 @@
 .custom-carousel-item {
   border-radius: 5px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, .2);
+}
+
+.ant-card-actions{
+  background: transparent;
+  border-top: solid 2px #00ebff;
+}
+
+.icons{
+  color: #00ebff!important;
+}
+
+.icons:hover{
+  color: #ffae00!important;
 }

@@ -11,9 +11,9 @@ const data = {
       17,
       14
     ],
-    backgroundColor: [
-      '#FF6384',
-      '#4BC0C0',
+    borderColor: [
+      '#00ebff',
+      '#ffae00',
       '#FFCE56',
       '#E7E9ED',
       '#36A2EB'
@@ -25,14 +25,22 @@ const data = {
     'Interests in Talks/Special Attraction',
     'Merchandise Shopping',
     'Online Engagement'
-  ],
+  ]
 };
+
+const options ={
+    angleLines:{
+      display: 'true',
+      color: 'white'
+  }
+};
+
 
 
 const Chart = () => {
 
   return (
-    <Polar data={data} legend={{
+    <Polar data={data} options={options} legend={{
         position: 'right', 
         labels: {
           fontSize: 10

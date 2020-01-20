@@ -103,7 +103,7 @@ const AppLayout = props => {
           </Menu>
         </Sider>
         <Layout style={{ overflowY: 'auto', background: 'transparent' }}>
-          <Content>
+          <Content style={{ marginLeft: '20px', marginTop: '20px' }}>
             <RouteSwitch>
               {routes.map((route, index) => {
                 return <Route key={index} path={route.layout + route.path} component={route.component} />

@@ -39,9 +39,9 @@
 
 .dashboard-sider {
   z-index: 100;
-  height: 92vh;
+  height: 90vh;
   padding: 2rem 0;
-  background: transparent;
+  background:transparent;
 }
 
 .dashboard-sider-menu {
@@ -167,4 +167,8 @@ border: none!important;
   background: rgba(22, 104, 159, .2);
   color: #00ebff;
   margin: .5rem;
+}
+
+.ant-card-actions > li:not(:last-child) {
+  border-right: 1px solid #00ebff;
 }
