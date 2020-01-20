@@ -25,34 +25,34 @@ const AppLayout = props => {
         params={{
           "particles": {
             "number": {
-                "value": 300,
-                "density": {
-                    "enable": false
-                }
+              "value": 300,
+              "density": {
+                  "enable": false
+              }
             },
             "size": {
-                "value": 5,
-                "random": true
+              "value": 5,
+              "random": true
             },
             "move": {
-                "direction": "bottom",
-                "out_mode": "out"
+              "direction": "bottom",
+              "out_mode": "out"
             },
             "line_linked": {
-                "enable": false
+              "enable": false
             }
           },
           "interactivity": {
             "events": {
-                "onhover": {
-                  "enable": true,
-                  "mode": "repulse"
-                }
+              "onhover": {
+                "enable": true,
+                "mode": "repulse"
+              }
             },
             "modes": {
-                "repulse": {
-                    "particles_nb": 10
-                }
+              "repulse": {
+                  "particles_nb": 10
+              }
             }
           }
         }}
@@ -103,7 +103,7 @@ const AppLayout = props => {
           </Menu>
         </Sider>
         <Layout style={{ overflowY: 'auto', background: 'transparent' }}>
-          <Content>
+          <Content style={{ padding: '1rem' }}>
             <RouteSwitch>
               {routes.map((route, index) => {
                 return <Route key={index} path={route.layout + route.path} component={route.component} />
