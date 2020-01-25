@@ -5,13 +5,14 @@ import { routes } from '../routes';
 import Particles from 'react-particles-js';
 import './AppLayout.css';
 const { Header, Footer, Sider, Content } = Layout;
+
 const AppLayout = props => {
   const { username, handleSignOut } = props;
   const [drawerVisible, setDrawerVisible] = useState(false);
   const onDrawerClose = () => setDrawerVisible(false);
 
   const dropdownMenu = (
-    <Menu>
+    <Menu className="nav-dropdown-menu">
       <Menu.Item key="1" onClick={handleSignOut}>
         <Icon type="logout" />
         Logout
@@ -31,7 +32,7 @@ const AppLayout = props => {
               }
             },
             "size": {
-              "value": 5,
+              "value": 3,
               "random": true
             },
             "move": {
@@ -80,10 +81,10 @@ const AppLayout = props => {
         <Icon type="menu" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
         <span className="nav-brand">Srijan 20</span>
         <span className="nav-right">
-          <Button style={{ marginRight: '20px' }}>
+          <Button className="cart-btn" style={{ marginRight: '20px' }}>
             <Icon type="shopping-cart" /> 
           </Button>
-          <Dropdown.Button overlay={dropdownMenu}>
+          <Dropdown.Button className="dropdown-btn" overlay={dropdownMenu}>
             <Icon type="user" /> ({username})
           </Dropdown.Button>
         </span>

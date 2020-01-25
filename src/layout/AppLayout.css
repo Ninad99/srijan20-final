@@ -37,6 +37,28 @@
   background: transparent;
 }
 
+.nav-right .cart-btn {
+  background-color: transparent;
+  color: #00ebff;
+  border: 1px solid #00ebff;
+}
+
+.nav-right .dropdown-btn .ant-btn {
+  background-color: transparent;
+  color: #00ebff;
+  border: 1px solid #00ebff;
+}
+
+.nav-dropdown-menu {
+  background-color: transparent;
+}
+
+.nav-dropdown-menu .ant-dropdown-menu-item {
+  border: 1px solid #00ebff;
+  background-color: transparent;
+  color: #00ebff;
+}
+
 .dashboard-sider {
   z-index: 100;
   height: 90vh;
