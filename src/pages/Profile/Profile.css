@@ -54,6 +54,7 @@
 }
 
 .user-card .user-card-content {
+  text-align: center;
   width: 100%;
   font-size: larger;
   background-color: transparent;
