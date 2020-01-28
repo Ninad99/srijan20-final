@@ -25,28 +25,28 @@ const Events = props => {
                   style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
                   title="Code"> 
               <ul className="custom-carousel">
-                <li className="custom-carousel-item">
-                  <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                  bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                  style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                  size="small" title="Event title"
-                  cover={
-                    <img
-                      alt="example"
-                      src="https://robohash.org/b"
-                      style={{ width: '75%', marginRight: 'auto'}}
-                    />
-                  }
-                  actions={[
-                    <Link to="/app/events/h42" style={{ color: '#00ebff' }}><Icon type="export" />&nbsp;Visit {fetchedEvents[0]}</Link>
-                  ]}
-                  >
-                    <Meta
-                        title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                        description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                      />
-                  </Card>
-                </li>
+                {fetchedEvents.map((ev, index) => {
+                  return (
+                    <li className="custom-carousel-item" key={index}>
+                      <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
+                            bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
+                            style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
+                            size="small" title={ev.eventName}
+                            cover={
+                              <img
+                                alt="example"
+                                src={"https://robohash.org/" + ev.id}
+                                style={{ width: '100%', marginRight: 'auto'}}
+                              />
+                            }
+                            actions={[
+                              <Link to={"/app/events/" + ev.id} style={{ color: '#00ebff' }}><Icon type="export" />&nbsp;Visit page</Link>
+                            ]}>
+                        <Meta description={<span style={{ color: "#00ebff" }}>This is the description</span>}/>
+                      </Card>
+                    </li>
+                  );
+                })}
               </ul>
             </Card>
           </Col>
