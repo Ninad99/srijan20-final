@@ -3,6 +3,7 @@ import { Link, Switch as RouteSwitch, Route } from 'react-router-dom';
 import { Layout, Dropdown, Menu, Drawer, Icon, Button } from 'antd';
 import { routes } from '../routes';
 import Particles from 'react-particles-js';
+import EventDisplay from '../components/EventDisplay/EventDisplay';
 import './AppLayout.css';
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -107,8 +108,9 @@ const AppLayout = props => {
           <Content style={{ padding: '1rem' }}>
             <RouteSwitch>
               {routes.map((route, index) => {
-                return <Route key={index} path={route.layout + route.path} component={route.component} />
+                return <Route key={index} path={route.layout + route.path} exact component={route.component} />
               })}
+              <Route path='/app/events/:eventName' exact render={props => <EventDisplay {...props} />} />
             </RouteSwitch>
             <Footer className="footer"><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
           </Content>
