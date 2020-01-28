@@ -34,12 +34,12 @@ const EventDisplay = (props) => {
                 </Col>
                 <Col md={24} className="d-flex justify-content-center align-items-center">
                   <Row>
-                    <Col span={12}>
+                    <Col lg={12}>
                       <div className="event-img-container">
                         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feagleeyevr.com%2Fwp-content%2Fuploads%2F2017%2F04%2Ftypes-of-drones.png&f=1&nofb=1" alt={eventName}></img>
                       </div>
                     </Col>
-                    <Col span={12}>
+                    <Col lg={12}>
                       <br />
                       <div className="events-poc-display" style={{ color: '#00ebff' }}>
                         {eventData.eventCoordinators.map((c, index) => {
