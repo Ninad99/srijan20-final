@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Switch as RouteSwitch, Route } from 'react-router-dom';
-import { Layout, Dropdown, Menu, Drawer, Icon, Button } from 'antd';
+import { Layout, Dropdown, Menu, Drawer, Icon } from 'antd';
 import { routes } from '../routes';
 import Particles from 'react-particles-js';
 import EventDisplay from '../components/EventDisplay/EventDisplay';
@@ -82,9 +82,6 @@ const AppLayout = props => {
         <Icon type="menu" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
         <span className="nav-brand">Srijan 20</span>
         <span className="nav-right">
-          <Button className="cart-btn" style={{ marginRight: '20px' }}>
-            <Icon type="shopping-cart" /> 
-          </Button>
           <Dropdown.Button className="dropdown-btn" overlay={dropdownMenu}>
             <Icon type="user" /> ({username})
           </Dropdown.Button>

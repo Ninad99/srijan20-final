@@ -37,12 +37,6 @@
   background: transparent;
 }
 
-.nav-right .cart-btn {
-  background-color: transparent;
-  color: #00ebff;
-  border: 1px solid #00ebff;
-}
-
 .nav-right .dropdown-btn .ant-btn {
   background-color: transparent;
   color: #00ebff;
