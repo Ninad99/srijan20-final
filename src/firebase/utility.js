@@ -46,7 +46,12 @@ export const getEventData = async (eventID) => {
 export const getEvents = async () => {
   try {
     const querySnapshot = await firestore.collection('events').get();
-    return querySnapshot.docs.map(doc => doc.id);
+    return querySnapshot.docs.map(doc => {
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
+    });
   } catch (err) {
     console.log(err);
   }
