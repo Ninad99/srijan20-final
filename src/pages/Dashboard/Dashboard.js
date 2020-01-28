@@ -1,13 +1,14 @@
 import React from 'react';
-import { Row, Col, Card, Icon, Avatar } from 'antd';
-import Chart from './../../components/Chart/Chart';
+import { Row, Col, Card, Icon } from 'antd';
+// import PolarChart from '../../components/PolarChart/PolarChart';
+import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import './Dashboard.css';
 const { Meta } = Card;
-let c=1;
+
 const Dashboard = props => {
   return (
     <section className="dashboard">
-      <Row >
+      <Row>
         <Col md={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center'}}>
           <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
@@ -110,7 +111,7 @@ const Dashboard = props => {
                     />
                 </Card>
               </li>
-                   </ul>
+            </ul>
           </Card>
         </Col>
         <Col md={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center'}}>
@@ -215,23 +216,24 @@ const Dashboard = props => {
                     />
                 </Card>
               </li>
-                   </ul>
+            </ul>
           </Card>
         </Col>
-   </Row>
+      </Row>
       <Row >
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
-          <Card title="Your Participation in Srijan 2020" headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
-                style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}>
-              <Chart></Chart>
+          <Card title="Your Participation in Srijan 2020"
+                headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
+                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
+                style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
+            <DoughnutChart></DoughnutChart>
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
-          <Card title="Your Badge" headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
+          <Card title="Your Badge"
+                headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}>
-
           </Card>
         </Col>
       </Row>
