@@ -33,3 +33,21 @@ export const writeUserData = async (userId, userName, email, year, department, c
     console.log(err);
   }
 }
+
+export const getEventData = async (eventID) => {
+  try {
+    const eventRef = await firestore.collection('events').doc(eventID).get();
+    return eventRef.data();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getEvents = async () => {
+  try {
+    const querySnapshot = await firestore.collection('events').get();
+    return querySnapshot.docs.map(doc => doc.id);
+  } catch (err) {
+    console.log(err);
+  }
+}
