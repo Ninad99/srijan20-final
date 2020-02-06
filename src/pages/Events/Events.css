@@ -7,6 +7,7 @@
 }
 
 .events-grid .events-card {
+  margin-bottom: 1rem;
   width: 350px;
   background-color: #00eaff11;
   display: flex;
