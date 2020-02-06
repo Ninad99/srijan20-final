@@ -27,8 +27,24 @@ export const writeUserData = async (userId, userName, email, year, department, c
       email: email,
       year: year,
       department: department,
-      college: college
+      college: college,
+      registeredEvents: []
     })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const updateUserData = async (userId, year, department, college) => {
+  try {
+    const userDetails = await getUserInfo(userId);
+    const updatedUserDetails = {
+      ...userDetails,
+      year: year,
+      department: department,
+      college: college
+    }
+    firestore.collection('users').doc(userId).update(updatedUserDetails);
   } catch (err) {
     console.log(err);
   }
