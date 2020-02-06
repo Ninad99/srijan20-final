@@ -1,223 +1,76 @@
-import React from 'react';
-import { Row, Col, Card, Icon } from 'antd';
-// import PolarChart from '../../components/PolarChart/PolarChart';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
+import { getUserInfo, getEventData } from '../../firebase/utility';
+import { Row, Col, Card, Spin } from 'antd';
+import PolarChart from '../../components/PolarChart/PolarChart';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import './Dashboard.css';
 const { Meta } = Card;
 
 const Dashboard = props => {
+  const { currentUser } = useContext(AuthContext);
+  const [userInfo, setUserInfo] = useState(null);
+  const [userEvents, setUserEvents] = useState([]);
+
+  useEffect(() => {
+    getUserInfo(currentUser.uid)
+      .then(async userDetails => {
+        setUserInfo(userDetails)
+        if (userDetails.registeredEvents.length > 0) {
+          const userEvents = [];
+          for (const ev of userDetails.registeredEvents) {
+            try {
+              const eventData = await getEventData(ev);
+              userEvents.push(eventData);
+            } catch (err) {
+              console.log(err);
+            }
+          }
+          console.log(userEvents);
+          setUserEvents(userEvents);
+        }
+      })
+      .catch(err => console.log(err));
+  }, [currentUser.uid])
+
   return (
     <section className="dashboard">
       <Row>
-        <Col md={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center'}}>
+        <Col md={24} className="flex-container" style={{ padding: '.5rem', textAlign: 'center'}}>
+        {userInfo ? (
           <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
-                title="Your registered events"> 
-            <ul className="custom-carousel">
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/b"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/b12"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/btrdhb"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/bhkj12"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-            </ul>
+                title="Your registered events">
+            {userInfo.registeredEvents.length === 0 ? (
+              <div style={{ padding: '2rem 0', color: '#00ebff' }}>
+                <strong>You have not registered for any events yet</strong>
+              </div>
+            ) : (
+              <ul className="custom-carousel">
+              {userEvents.map((ev, index) => (
+                <li className="custom-carousel-item" key={index}>
+                  <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
+                        bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
+                        style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
+                        size="small" title={ev.eventName}
+                        cover={
+                          <div style={{ width: '100%', padding: '1rem 0' }}>
+                            <img
+                              alt="example"
+                              src={ev.photoURL ? ev.photoURL : "https://robohash.org/" + ev.id}
+                              style={{ width: '100%', height: '40%' }}/>
+                          </div>
+                        }>
+                    <Meta
+                        title={<span style={{ color: "#00ebff", textTransform: 'uppercase' }}>Event type - {ev.eventType}</span>}/>
+                  </Card>
+                </li>
+              ))}
+              </ul>
+            )}
           </Card>
-        </Col>
-        <Col md={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center'}}>
-          <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
-                style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
-                title="Your registered events"> 
-            <ul className="custom-carousel">
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/sac"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/ascdvg12"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/gdbgdtfdhrdhb"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-              <li className="custom-carousel-item">
-                <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
-                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
-                style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                size="small" title="Event title"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://robohash.org/gfbgbkj12"
-                    style={{ width: '75%', marginRight: 'auto'}}
-                  />
-                }
-                actions={[
-                  <Icon className="icons" type="setting" key="setting" />,
-                  <Icon className="icons" type="edit" key="edit" />,
-                  <Icon className="icons" type="ellipsis" key="ellipsis" />,
-                ]}
-                >
-                  <Meta
-                      title={<span style={{ color: "#00ebff" }}>Card title</span>}
-                      description={<span style={{ color: "#00ebff" }}>This is the description</span>}
-                    />
-                </Card>
-              </li>
-            </ul>
-          </Card>
+          ) : <Spin />}
         </Col>
       </Row>
       <Row >
@@ -226,14 +79,15 @@ const Dashboard = props => {
                 headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
-            <DoughnutChart></DoughnutChart>
+            <DoughnutChart />
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
-          <Card title="Your Badge"
+          <Card title="Srijan 20 events"
                 headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}>
+            <PolarChart />
           </Card>
         </Col>
       </Row>
