@@ -4,6 +4,8 @@ import { Layout, Dropdown, Menu, Drawer, Icon } from 'antd';
 import { routes } from '../routes';
 import Particles from 'react-particles-js';
 import EventDisplay from '../components/EventDisplay/EventDisplay';
+import srijanLogoWhite from '../assets/Images/srijan_logo_white.png';
+import srijanLogoBlack from '../assets/Images/srijan_logo_black.png';
 import './AppLayout.css';
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -61,7 +63,7 @@ const AppLayout = props => {
         style={{ height: '100vh', width: '100%' }} />
       <Drawer
         bodyStyle={{ padding: 0, zIndex: 100 }}
-        title="Srijan 20"
+        title={<img src={srijanLogoBlack} width="200px" alt="srijan logo" />}
         placement="left"
         closable={true}
         onClose={onDrawerClose}
@@ -80,7 +82,7 @@ const AppLayout = props => {
       </Drawer>
       <Header className="navigation" theme="dark">
         <Icon type="menu" className="appdrawer-icon" onClick={e => setDrawerVisible(true)} />
-        <span className="nav-brand">Srijan 20</span>
+        <span className="nav-brand"><img src={srijanLogoWhite} width="200px" alt="srijan logo" /></span>
         <span className="nav-right">
           <Dropdown.Button className="dropdown-btn" overlay={dropdownMenu}>
             <Icon type="user" /> ({username})
@@ -102,14 +104,22 @@ const AppLayout = props => {
           </Menu>
         </Sider>
         <Layout style={{ overflowY: 'auto', background: 'transparent' }}>
-          <Content style={{ padding: '1rem' }}>
+          <Content style={{ padding: '1rem', zIndex: 300 }}>
             <RouteSwitch>
               {routes.map((route, index) => {
                 return <Route key={index} path={route.layout + route.path} exact component={route.component} />
               })}
               <Route path='/app/events/:eventName' exact render={props => <EventDisplay {...props} />} />
             </RouteSwitch>
-            <Footer className="footer"><strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106. </Footer>
+            <Footer className="footer">
+              <span>
+                <strong>Srijan 20</strong> Made with &#9829; by the Faculty of Engineering And Technology Students' Union, <br/> Jadavpur University <br/>Salt Lake Campus Plot No.8, Salt Lake Bypass, LB Block, Sector III, Salt Lake City, Kolkata 700106.
+              </span>
+              <div className="footer-social-media-icons">
+                <a href="https://www.facebook.com/jusrijan/" target="_blank_"><Icon type="facebook" size="2x" /></a>
+                <a href="https://www.instagram.com/srijan_ju/" target="_blank_"><Icon type="instagram" size="2x" /></a>
+              </div>
+            </Footer>
           </Content>
         </Layout>
       </Layout>
