@@ -1,21 +1,24 @@
+.eventInfo {
+  padding: 1rem;
+}
+
 .event-img-container {
   width: 100%;
   padding: 1rem;
 }
 
 .event-img-container img {
-  width: 350px;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-  .event-img-container img {
-    width: 250px;
+  .eventInfo {
+    padding: 0;
   }
-}
-
-@media screen and (max-width: 576px) {
-  .event-img-container img {
-    width: 200px;
+  
+  .event-img-container {
+    width: 100%;
+    padding: 1rem 0;
   }
 }
 
