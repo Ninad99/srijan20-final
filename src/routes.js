@@ -3,7 +3,7 @@ import EventsPage from './pages/Events/Events';
 import MerchandisePage from './pages/Merchandise/Merchandise';
 import TalksPage from './pages/Talks/Talks';
 import TeamPage from './pages/Team/Team';
-import TechnofriesPage from './pages/Technofries/Technofries';
+import TechknowfriesPage from './pages/Techknowfries/Techknowfries';
 import WorkshopsPage from './pages/Workshops/Workshops';
 import ProfilePage from './pages/Profile/Profile';
 
@@ -44,10 +44,10 @@ export const routes = [
     icon: 'team'
   },
   {
-    path: '/technofries',
-    component: TechnofriesPage,
+    path: '/techknowfries',
+    component: TechknowfriesPage,
     layout: '/app',
-    routeName: 'Technofries',
+    routeName: 'Techknowfries',
     icon: 'read'
   },
   {
