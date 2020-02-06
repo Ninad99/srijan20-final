@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Row, Col, Card, Form, Input, Icon, Skeleton, Button, notification, Avatar } from 'antd';
 import './Profile.css';
 import { AuthContext } from '../../context/authContext';
-import { getUserInfo, writeUserData } from '../../firebase/utility';
+import { getUserInfo, updateUserData } from '../../firebase/utility';
 
 const Profile = props => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,8 +15,8 @@ const Profile = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { username, email, year, college, department } = e.target.elements;
-    writeUserData(currentUser.uid, username.value, email.value, year.value, department.value, college.value);
+    const { year, college, department } = e.target.elements;
+    updateUserData(currentUser.uid, year.value, department.value, college.value);
     notification['success']({
       message: 'Success!',
       description: 'Your profile has been updated!',
