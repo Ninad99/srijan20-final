@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { getUserInfo, getEventData } from '../../firebase/utility';
 import { Row, Col, Card, Spin } from 'antd';
-import PolarChart from '../../components/PolarChart/PolarChart';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import './Dashboard.css';
 const { Meta } = Card;
@@ -75,7 +74,7 @@ const Dashboard = props => {
       </Row>
       <Row >
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
-          <Card title="Your Participation in Srijan 2020"
+          <Card title="Srijan 20 events"
                 headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
@@ -83,11 +82,11 @@ const Dashboard = props => {
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
-          <Card title="Srijan 20 events"
+          <Card title="Your participation in Srijan 20"
                 headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
-                style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}>
-            <PolarChart />
+                style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color: '#00ebff' }}>
+            This section will be updated soon!
           </Card>
         </Col>
       </Row>
