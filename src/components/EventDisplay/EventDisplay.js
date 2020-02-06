@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { firestore } from '../../firebase/config';
-import { getUserInfo } from '../../firebase/utility';
+// import { firestore } from '../../firebase/config';
+// import { getUserInfo } from '../../firebase/utility';
 import { AuthContext } from '../../context/authContext';
 import { getEventData } from '../../firebase/utility';
 import { Row, Col, Card, Spin, Icon } from 'antd';
@@ -9,43 +9,43 @@ import './EventDisplay.css';
 const EventDisplay = (props) => {
   const { params: { eventName } } = props.match;
   const { currentUser } = useContext(AuthContext);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [showRegisterSpinner, setShowRegisterSpinner] = useState(false);
+  // const [isRegistered, setIsRegistered] = useState(false);
+  // const [showRegisterSpinner, setShowRegisterSpinner] = useState(false);
   const [eventData, setEventData] = useState(null);
 
   useEffect(() => {
     getEventData(eventName)
       .then(data => {
         setEventData(data);
-        if (data.registeredUsers.includes(currentUser.uid)) {
-          setIsRegistered(true);
-        }
+        // if (data.registeredUsers.includes(currentUser.uid)) {
+        //   setIsRegistered(true);
+        // }
       })
   }, [eventName, currentUser.uid]);
 
-  const handleEventRegister = async () => {
-    setShowRegisterSpinner(true);
-    const userId = currentUser.uid;
-    try {
-      const eventInfo = await getEventData(eventName);
-      const updatedUsers = [...eventInfo.registeredUsers, userId];
-      firestore.collection('events').doc(eventName).update({
-        ...eventInfo,
-        registeredUsers: updatedUsers
-      });
-      const userInfo = await getUserInfo(currentUser.uid);
-      const updatedUserRegistrations = [...userInfo.registeredEvents, eventName];
-      firestore.collection('users').doc(userId).update({
-        ...userInfo,
-        registeredEvents: updatedUserRegistrations
-      });
-      setIsRegistered(true);
-      setShowRegisterSpinner(false);
-    } catch (err) {
-      console.log(err);
-      setShowRegisterSpinner(false);
-    }
-  }
+  // const handleEventRegister = async () => {
+  //   setShowRegisterSpinner(true);
+  //   const userId = currentUser.uid;
+  //   try {
+  //     const eventInfo = await getEventData(eventName);
+  //     const updatedUsers = [...eventInfo.registeredUsers, userId];
+  //     firestore.collection('events').doc(eventName).update({
+  //       ...eventInfo,
+  //       registeredUsers: updatedUsers
+  //     });
+  //     const userInfo = await getUserInfo(currentUser.uid);
+  //     const updatedUserRegistrations = [...userInfo.registeredEvents, eventName];
+  //     firestore.collection('users').doc(userId).update({
+  //       ...userInfo,
+  //       registeredEvents: updatedUserRegistrations
+  //     });
+  //     setIsRegistered(true);
+  //     setShowRegisterSpinner(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setShowRegisterSpinner(false);
+  //   }
+  // }
 
   return (
     <div>
@@ -79,7 +79,10 @@ const EventDisplay = (props) => {
                           return <strong key={index}><Icon type="phone" /> {c}</strong>
                         })}
                         <br />
-                        {isRegistered ? (
+                        <span className="btn">
+                          <p style={{ padding: 0, margin: 0 }}>Registrations will open soon!</p>
+                        </span>
+                        {/* {isRegistered ? (
                           <span className="btn">
                             <p style={{ padding: 0, margin: 0 }}>You've registered for this event</p>
                           </span>
@@ -90,7 +93,7 @@ const EventDisplay = (props) => {
                             </span>
                             {showRegisterSpinner ? <Spin /> : null}
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </Col>
                   </Row>
