@@ -1,0 +1,15 @@
+.technofries-img {
+  width: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .technofries-img {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .technofries-img {
+    width: 250px;
+  }
+}
