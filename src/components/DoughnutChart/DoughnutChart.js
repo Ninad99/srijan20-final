@@ -4,7 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 
 const data = {
   datasets: [{
-    data: [11, 16, 7, 17, 14, 20],
+    data: [3, 5, 2, 1, 5],
     backgroundColor: [
       '#29b6f6',
       '#00e676',
@@ -23,12 +23,11 @@ const data = {
     ]
   }],
   labels: [
-    'Coding Events',
-    'Robotic Events',
-    'Management Events',
-    'Gaming Events',
-    'Misc Events',
-    'Special Attractions'
+    'Coding',
+    'Robotics',
+    'Quiz',
+    'Gaming',
+    'Misc'
   ],
 };
 
