@@ -41,6 +41,11 @@
 }
 
 .landing-actions-heading {
+  margin-bottom: -2rem;
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   animation: fadeIn 2s ease-in;
 }
 

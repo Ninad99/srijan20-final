@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from 'antd';
 import fgimg from '../../assets/Images/fg-landing.png';
+import srijanLogo from '../../assets/Images/srijan_logo_white.png';
+import JULogo from '../../assets/Images/Jadavpur_University_Logo.svg';
 import Particles from 'react-particles-js';
 import './Landing.css';
 
@@ -20,13 +22,13 @@ const Landing = props => {
         params={{
           "particles": {
             "number": {
-                "value": 300,
+                "value": 250,
                 "density": {
                     "enable": false
                 }
             },
             "size": {
-                "value": 5,
+                "value": 3,
                 "random": true
             },
             "move": {
@@ -54,7 +56,11 @@ const Landing = props => {
         style={{ height: '100vh', width: '100%' }} />
       <img id="fg-img" className="fgimg" src={ fgimg } alt="landing-fg" />
       {!showForm ? (<div className="landing-actions">
-        <Title style={{ color: '#fafafa' }} className="landing-actions-heading">Srijan 20</Title>
+        <div className="landing-actions-heading">
+          <img src={JULogo} alt="ju-logo" height="50px" width="50px" />
+          <Title level={4} style={{ color: '#fafafa', margin: 0 }}>JADAVPUR UNIVERSITY</Title>
+        </div>
+        <img src={srijanLogo} style={{ animation: 'fadeIn 4s ease-in' }} alt="srijan-logo" width="500px"/>
         <div className="landing-actions-main">
           {isAuthenticated ? (
             <Link to="/app/dashboard">
