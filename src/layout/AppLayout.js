@@ -62,7 +62,7 @@ const AppLayout = props => {
         }}
         style={{ height: '100vh', width: '100%' }} />
       <Drawer
-        bodyStyle={{ padding: 0, zIndex: 100 }}
+        bodyStyle={{ padding: 0, zIndex: 800 }}
         title={<img src={srijanLogoBlack} width="200px" alt="srijan logo" />}
         placement="left"
         closable={true}

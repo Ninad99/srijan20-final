@@ -54,7 +54,7 @@ const Dashboard = props => {
                         style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
                         size="small" title={ev.eventName}
                         cover={
-                          <div style={{ width: '100%', padding: '1rem 0' }}>
+                          <div style={{ width: '100%', padding: 0 }}>
                             <img
                               alt="example"
                               src={ev.photoURL ? ev.photoURL : "https://robohash.org/" + ev.id}
