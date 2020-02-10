@@ -61,6 +61,7 @@ const Landing = props => {
           <Title level={4} style={{ color: '#fafafa', margin: 0 }}>JADAVPUR UNIVERSITY</Title>
         </div>
         <img src={srijanLogo} style={{ animation: 'fadeIn 4s ease-in' }} alt="srijan-logo" width="500px"/>
+        <Title level={4} style={{ color: '#fafafa', margin: 0, animation: 'fadeIn 4s ease-in', marginTop: '-1.25rem', marginBottom: '.75rem' }}>5th - 8th March</Title>
         <div className="landing-actions-main">
           {isAuthenticated ? (
             <Link to="/app/dashboard">
