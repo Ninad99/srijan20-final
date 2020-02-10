@@ -44,6 +44,16 @@
   border: 1px solid rgba(0, 235, 255, 1);
 }
 
+
+.merchandise .merchandise-form .ant-alert-error {
+  background: rgba(255, 0, 0, .2);
+  border: none;
+}
+
+.merchandise .merchandise-form .ant-alert-message {
+  color: #ffae00;
+}
+
 @media screen and (max-width: 768px) {
   .merchandise-form {
     width: 90%;
