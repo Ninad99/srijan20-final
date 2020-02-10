@@ -66,6 +66,7 @@ const Merchandise = () => {
               <div className="merchandise-img-container">
                 <img src={srijanTshirtMockup} alt="merchandise-img" />
               </div>
+              <h3 className="merchandise-amount">Get it for &#8377;300/-</h3>
             </Col>
             <Col lg={14} className="merchandise-info">
               {userInfo ? (

@@ -7,6 +7,11 @@
   width: 100%;
 }
 
+.merchandise .merchandise-amount {
+  color: #00ebff;
+  font-size: 1.25rem;
+}
+
 .merchandise-info {
   display: flex;
   flex-direction: column;
