@@ -74,9 +74,10 @@ const Workshops = props => {
               <Col lg={12}>
                 <h2 className="workshop-title">Game Development Workshop using Unity</h2>
                 <h5 className="workshop-subtitle">
-                  <Icon type="calendar" /> Date: 15th February&nbsp;|&nbsp;
-                  <Icon type="clock-circle" /> Time: 10AM to 5PM&nbsp;|&nbsp;
-                  <Icon type="home" /> Venue: TEQIP 101
+                  <Icon type="calendar" /> Date: 15th February<br />
+                  <Icon type="clock-circle" /> Time: 10AM to 5PM<br />
+                  <Icon type="home" /> Venue: TEQIP 101<br />
+                  <Icon type="phone" /> Soumya: 8371825865
                 </h5>
                 <div className="workshop-img-container">
                   <img src={gameDevWorkshop} alt="gameDev workshop with Unity" />

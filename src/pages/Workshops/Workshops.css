@@ -10,11 +10,13 @@
 .workshops .workshop-title {
   color: #00ebff;
   font-size: 1.5rem;
+  text-align: left;
 }
 
 .workshops .workshop-subtitle {
   color: #00ebff;
-  font-size: .8rem;
+  font-size: .9rem;
+  text-align: left;
 }
 
 .workshops .workshop-info {
