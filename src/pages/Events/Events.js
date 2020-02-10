@@ -10,7 +10,6 @@ const Events = props => {
   useEffect(() => {
     getEvents()
       .then(data => {
-        console.log(data);
         setFetchedEvents(data);
       })
   }, [])

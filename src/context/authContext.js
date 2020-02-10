@@ -14,7 +14,6 @@ const AuthContextProvider = props => {
   useEffect(() => {
     firebase.auth().getRedirectResult()
       .then(result => {
-        console.log('[authContext] redirect result: ', result);
         if (result.user && result.additionalUserInfo.isNewUser) {
           const user = result.user;
           writeUserData(user.uid, user.displayName, user.email, 'unset', 'unset', 'unset');

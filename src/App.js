@@ -17,7 +17,6 @@ const App = props => {
 
   useEffect(() => {
     if (currentUser) {
-      console.log(currentUser);
       getUsernameFromDatabase(currentUser.uid)
         .then(usr => {
           setUserName(usr);
