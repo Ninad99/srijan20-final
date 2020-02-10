@@ -78,7 +78,7 @@ const Dashboard = props => {
                 headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
-            <DoughnutChart />
+            <DoughnutChart data={[3, 1, 4, 1, 1, 1]} labels={['Coding', 'Gaming', 'Robotics', 'Photography', 'Quiz', 'Misc']} />
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
