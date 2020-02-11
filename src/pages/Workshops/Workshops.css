@@ -7,13 +7,13 @@
   width: 100%;
 }
 
-.workshops .workshop-title {
+.workshops .workshop-info  .workshop-title {
   color: #00ebff;
   font-size: 1.5rem;
   text-align: left;
 }
 
-.workshops .workshop-subtitle {
+.workshops .workshop-info  .workshop-subtitle {
   color: #00ebff;
   font-size: .9rem;
   text-align: left;
@@ -24,6 +24,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem 0;
 }
 
 .workshops .workshop-info .workshop-form {

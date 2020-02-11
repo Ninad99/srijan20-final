@@ -4,6 +4,7 @@
 }
 
 .merchandise-img-container img {
+  padding: 0 1rem;
   width: 100%;
 }
 

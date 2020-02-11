@@ -1,66 +1,68 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Row, Col, Card, Form, Input, Alert, Spin, Icon, Button } from 'antd';
-import { AuthContext } from '../../context/authContext';
-import { getUserInfo } from '../../firebase/utility';
-import { firestore } from '../../firebase/config';
+// import React, { useState, useEffect, useContext } from 'react';
+// import { Row, Col, Card, Form, Input, Alert, Spin, Icon, Button } from 'antd';
+// import { AuthContext } from '../../context/authContext';
+// import { getUserInfo } from '../../firebase/utility';
+// import { firestore } from '../../firebase/config';
+import React from 'react';
+import { Row, Col, Card, Icon } from 'antd';
 import gameDevWorkshop from '../../assets/Images/gamedev-workshop-unity.jpg';
 import './Workshops.css';
 
-const isValid = (department, college, year, phoneNo) => {
-  return (department !== "") && (college !== "") && (year !== "") && (phoneNo !== "");
-}
+// const isValid = (department, college, year, phoneNo) => {
+//   return (department !== "") && (college !== "") && (year !== "") && (phoneNo !== "");
+// }
 
 const Workshops = props => {
-  const [userInfo, setUserInfo] = useState(null);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  // const [userInfo, setUserInfo] = useState(null);
+  // const [isRegistered, setIsRegistered] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [formError, setFormError] = useState(false);
+  // const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    firestore.collection('workshopOrders').get()
-      .then(querySnapshot => {
-        querySnapshot.docs.forEach(doc => {
-          const data = doc.data();
-          if (data.userId === currentUser.uid) {
-            setIsRegistered(true);
-          }
-        })
-      })
-    getUserInfo(currentUser.uid)
-      .then(data => setUserInfo(data))
-      .catch(err => console.log(err))
-  }, [currentUser.uid])
+  // useEffect(() => {
+  //   firestore.collection('workshopOrders').get()
+  //     .then(querySnapshot => {
+  //       querySnapshot.docs.forEach(doc => {
+  //         const data = doc.data();
+  //         if (data.userId === currentUser.uid) {
+  //           setIsRegistered(true);
+  //         }
+  //       })
+  //     })
+  //   getUserInfo(currentUser.uid)
+  //     .then(data => setUserInfo(data))
+  //     .catch(err => console.log(err))
+  // }, [currentUser.uid])
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    const { username, department, college, year, email, phoneNumber } = event.target.elements;
-    if (isValid(department.value, college.value, year.value, phoneNumber.value)) {
-      const date = new Date();
-      const data = {
-        date: date.toDateString() + " " + date.toTimeString(),
-        name: username.value,
-        department: department.value,
-        college: college.value,
-        year: year.value,
-        email: email.value,
-        phoneNo: phoneNumber.value,
-        paymentStatus: "pending",
-        userId: currentUser.uid,
-        amount: 400
-      }
-      firestore.collection('workshopOrders').add(data)
-        .then(docRef => {
-          window.location.href = `http://localhost:2000/workshops/txn?orderId=${docRef.id}&amount=400`;
-        })
-        .catch(err => console.log(err));
-      console.log(data);
-    } else {
-      setFormError(true);
-      setIsLoading(false);
-    }
-  }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   const { username, department, college, year, email, phoneNumber } = event.target.elements;
+  //   if (isValid(department.value, college.value, year.value, phoneNumber.value)) {
+  //     const date = new Date();
+  //     const data = {
+  //       date: date.toDateString() + " " + date.toTimeString(),
+  //       name: username.value,
+  //       department: department.value,
+  //       college: college.value,
+  //       year: year.value,
+  //       email: email.value,
+  //       phoneNo: phoneNumber.value,
+  //       paymentStatus: "pending",
+  //       userId: currentUser.uid,
+  //       amount: 400
+  //     }
+  //     firestore.collection('workshopOrders').add(data)
+  //       .then(docRef => {
+  //         window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/workshops/txn?orderId=${docRef.id}&amount=400`;
+  //       })
+  //       .catch(err => console.log(err));
+  //     console.log(data);
+  //   } else {
+  //     setFormError(true);
+  //     setIsLoading(false);
+  //   }
+  // }
 
   return (
     <section className="workshops">
@@ -72,6 +74,11 @@ const Workshops = props => {
                 title="Workshops">
             <Row>
               <Col lg={12}>
+                <div className="workshop-img-container">
+                  <img src={gameDevWorkshop} alt="gameDev workshop with Unity" />
+                </div>
+              </Col>
+              <Col lg={12} className="workshop-info">
                 <h2 className="workshop-title">Game Development Workshop using Unity</h2>
                 <h5 className="workshop-subtitle">
                   <Icon type="calendar" /> Date: 15th February<br />
@@ -79,12 +86,12 @@ const Workshops = props => {
                   <Icon type="home" /> Venue: TEQIP 101<br />
                   <Icon type="phone" /> Soumya: 8371825865
                 </h5>
-                <div className="workshop-img-container">
-                  <img src={gameDevWorkshop} alt="gameDev workshop with Unity" />
-                </div>
-              </Col>
-              <Col lg={12} className="workshop-info">
-              {userInfo ? (
+                <a href="https://docs.google.com/forms/d/16iJaKV3oBg58oqya32fz16DHeU5oEB3OGtR11ZehI44/viewform?ts=5e42bcd6&edit_requested=true" target="_blank_">
+                  <span className="btn">
+                    <p style={{ padding: 0, margin: 0 }}>Register</p>
+                  </span>
+                </a>
+              {/* {userInfo ? (
                 <Form onSubmit={handleSubmit} layout="horizontal" className="workshop-form">
                   {formError ? <Alert message="Form fields can't be blank!" type="error" /> : null}
                   <br />
@@ -149,7 +156,7 @@ const Workshops = props => {
                     </Button>
                   )}
                 </Form>
-              ) : <Spin />}
+              ) : <Spin />} */}
               </Col>
             </Row>
           </Card>

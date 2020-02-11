@@ -43,7 +43,7 @@ const Merchandise = () => {
       }
       firestore.collection('orders').add(data)
         .then(docRef => {
-          window.location.href = `http://localhost:2000/merch/txn?orderId=${docRef.id}&amount=300`;
+          window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
         })
         .catch(err => console.log(err));
       console.log(data);
@@ -66,7 +66,7 @@ const Merchandise = () => {
               <div className="merchandise-img-container">
                 <img src={srijanTshirtMockup} alt="merchandise-img" />
               </div>
-              <h3 className="merchandise-amount">Get it for &#8377;300/-</h3>
+              <h3 className="merchandise-amount">Get your name printed T-shirt for &#8377;300/-</h3>
             </Col>
             <Col lg={14} className="merchandise-info">
               {userInfo ? (
