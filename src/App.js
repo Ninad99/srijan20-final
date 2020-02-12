@@ -4,7 +4,7 @@ import './App.css';
 import firebase from './firebase/config';
 import { AuthContext } from './context/authContext';
 import { getUsernameFromDatabase } from './firebase/utility';
-
+import { notification } from 'antd';
 import PrivateRoute from './hoc/PrivateRoute';
 import LandingPage from './pages/Landing/Landing';
 import AppLayout from './layout/AppLayout';
@@ -22,6 +22,11 @@ const App = props => {
           setUserName(usr);
           setIsAuthenticated(true);
           history.push('/app/dashboard');
+          notification['success']({
+            message: 'Success!',
+            description: `Logged in as ${usr}`,
+            duration: 2
+          })
         })
         .catch(err => console.log(err));
     } else {
