@@ -8,19 +8,25 @@ const PreLoader = props => {
   const preloaderRef = useRef();
 
   useEffect(() => {
-    let count = 0;    
-    const id = setInterval(updateProgress, 50);
+    let count = 0, timeout;    
+    const id = setInterval(updateProgress, 40);
+
     function updateProgress() {
       count++;
       if (count > 100) {
         clearInterval(id);
-        setTimeout(() => {
+        timeout = setTimeout(() => {
           preloaderRef.current.classList.add('d-none');
-          setIsLoading(false); 
+          setIsLoading(false);
         }, 500);
       } else {
         setProgress(count);
       }
+    }
+
+    return () => {
+      clearInterval(id);
+      clearTimeout(timeout);
     }
   }, [setIsLoading]);
 
