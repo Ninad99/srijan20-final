@@ -58,7 +58,7 @@ const Register = props => {
   return (
     <Form onSubmit={handleSubmit} className="register-form">
       <h1>Srijan 20 | Register</h1>
-      {formError ? <Alert message="Invalid form submission. Check the form content and retry!" type="error" /> : null}
+      {formError ? <Alert message="Invalid form submission. Email should be lowercase and password should be atleast 6 characters. Check the form content and retry!" type="error" /> : null}
       {error ? <Alert message={error.message} type="error" /> : null}
       <hr /><br />
       <Form.Item>
