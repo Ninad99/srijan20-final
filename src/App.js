@@ -23,8 +23,7 @@ const App = props => {
           setIsAuthenticated(true);
           history.push('/app/dashboard');
           notification['success']({
-            message: 'Success!',
-            description: `Logged in as ${usr}`,
+            message: `Logged in as ${usr}`,
             duration: 2
           })
         })
