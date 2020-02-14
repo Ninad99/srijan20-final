@@ -13,6 +13,11 @@
   font-size: 1.25rem;
 }
 
+.merchandise .merchandise-amount-sub {
+  color: #00ebff;
+  font-size: 1rem;
+}
+
 .merchandise-info {
   display: flex;
   flex-direction: column;
@@ -58,6 +63,10 @@
 
 .merchandise .merchandise-form .ant-alert-message {
   color: #ffae00;
+}
+
+.ant-radio-group .ant-radio-wrapper span {
+  color: #00ebff;
 }
 
 @media screen and (max-width: 768px) {

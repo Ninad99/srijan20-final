@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
-import { Row, Col, Card, Icon, Form, Input, Button, Spin, Alert } from 'antd';
+import { Row, Col, Card, Icon, Form, Input, Button, Spin, Alert, Radio, Modal } from 'antd';
 import { getUserInfo } from '../../firebase/utility';
 import { firestore } from '../../firebase/config';
 import srijanTshirtMockup from '../../assets/Images/srijan_tshirt_mockup.png';
 import './Merchandise.css';
+
+const { confirm } = Modal;
 
 const isValid = (department, college, year, printName, phoneNo) => {
   return (department !== "") && (college !== "") && (year !== "") && (printName !== "") && (phoneNo !== "");
@@ -14,40 +16,54 @@ const Merchandise = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState(false);
+  const [checkoutDisabled, setCheckoutDisabled] = useState(false);
+  const [size, setSize] = useState('M');
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     getUserInfo(currentUser.uid)
       .then(data => setUserInfo(data))
       .catch(err => console.log(err))
-  }, [currentUser.uid])
+  }, [currentUser.uid]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
     const { username, department, college, year, email, printName, phoneNumber } = event.target.elements;
     if (isValid(department.value, college.value, year.value, printName.value, phoneNumber.value)) {
-      const date = new Date();
-      const data = {
-        date: date.toDateString() + " " + date.toTimeString(),
-        name: username.value,
-        department: department.value,
-        college: college.value,
-        year: year.value,
-        email: email.value,
-        printName: printName.value,
-        phoneNo: phoneNumber.value,
-        paymentStatus: "pending",
-        userId: currentUser.uid,
-        amount: 300
-      }
-      firestore.collection('orders').add(data)
-        .then(docRef => {
-          window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
-        })
-        .catch(err => console.log(err));
-      console.log(data);
+      confirm({
+        title: 'Submit order request with given data?',
+        onOk() {
+          setCheckoutDisabled(true);
+          const date = new Date();
+          const data = {
+            date: date.toDateString() + " " + date.toTimeString(),
+            name: username.value,
+            department: department.value,
+            college: college.value,
+            year: year.value,
+            email: email.value,
+            printName: printName.value,
+            phoneNo: phoneNumber.value,
+            paymentStatus: "pending",
+            size: size,
+            userId: currentUser.uid,
+            amount: 300
+          }
+          firestore.collection('orders').add(data)
+            .then(docRef => {
+              setCheckoutDisabled(false);
+              window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
+            })
+            .catch(err => console.log(err));
+        },
+        onCancel() {
+          setCheckoutDisabled(false);
+          setIsLoading(false);
+        },
+      });
     } else {
+      setCheckoutDisabled(false);
       setFormError(true);
       setIsLoading(false);
     }
@@ -67,6 +83,7 @@ const Merchandise = () => {
                 <img src={srijanTshirtMockup} alt="merchandise-img" />
               </div>
               <h3 className="merchandise-amount">Get your name printed T-shirt for &#8377;300/-</h3>
+              <p className="merchandise-amount-sub">For multiple orders, contact 9333324765 (Soumyadip)</p>
             </Col>
             <Col lg={14} className="merchandise-info">
               {userInfo ? (
@@ -115,13 +132,6 @@ const Merchandise = () => {
                       prefix={<Icon type="mail" style={{ color: '#00ebff' }} />}
                       placeholder="Email" />
                   </Form.Item>
-                  <Form.Item label="Print name" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-                    <Input
-                      className="merchandise-input"
-                      name="printName"
-                      prefix={<Icon type="user" style={{ color: '#00ebff' }} />}
-                      placeholder="Name to be printed on T-shirt" />
-                  </Form.Item>
                   <Form.Item label="Phone no." labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
                     <Input
                       className="merchandise-input"
@@ -130,7 +140,23 @@ const Merchandise = () => {
                       prefix={<Icon type="phone" style={{ color: '#00ebff' }} />}
                       placeholder="Phone no." />
                   </Form.Item>
-                  <Button htmlType="submit" className="merchandise-submit-btn" style={{ color: '#00ebff' }}>
+                  <Form.Item label="Print name" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+                    <Input
+                      className="merchandise-input"
+                      name="printName"
+                      prefix={<Icon type="user" style={{ color: '#00ebff' }} />}
+                      placeholder="Name to be printed on T-shirt" />
+                  </Form.Item>
+                  <Form.Item label="Size" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+                    <Radio.Group onChange={e => setSize(e.target.value)} value={size}>
+                      <Radio value="S">S</Radio>
+                      <Radio value="M">M</Radio>
+                      <Radio value="L">L</Radio>
+                      <Radio value="XL">XL</Radio>
+                      <Radio value="2XL">2XL</Radio>
+                    </Radio.Group>
+                  </Form.Item>
+                  <Button htmlType="submit" className="merchandise-submit-btn" style={{ color: '#00ebff' }} disabled={checkoutDisabled}>
                     Proceed to checkout&nbsp;&nbsp;{isLoading ? <Spin /> : null}
                   </Button>
                 </Form>
