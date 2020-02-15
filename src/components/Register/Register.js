@@ -45,9 +45,10 @@ const Register = props => {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
+    const yearSuffix = ["st", "nd", "rd", "th", "th"];
     const { username, email, password, year, department, college } = e.target.elements;
     if (isValid(email.value, password.value)) {
-      handleRegister(username.value, email.value, password.value, year.value, department.value, college.value);
+      handleRegister(username.value, email.value, password.value, year.value + yearSuffix[year.value], department.value, college.value);
       setFormError(false);
     } else {
       setFormError(true);
