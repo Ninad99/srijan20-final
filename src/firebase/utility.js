@@ -1,10 +1,9 @@
-import { firestore } from './config';
+import firebase, { database } from './config';
 
 export const getUsernameFromDatabase = async (userId) => {
   try {
-    const userRef = await firestore.collection('users').doc(userId).get();
-    const user = userRef.data();
-    return user.username;
+    const data =  await (await database.ref("srijan/profile/" + userId + "/parentprofile/name").once('value')).val();
+    return data;
   } catch (err) {
     console.log(err);
     return '';
@@ -13,8 +12,15 @@ export const getUsernameFromDatabase = async (userId) => {
 
 export const getUserInfo = async (userId) => {
   try {
-    const userRef = await firestore.collection('users').doc(userId).get();
-    return userRef.data();
+    return await (await database.ref("srijan/profile/" + userId + "/parentprofile").once('value')).val();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getUserEvents = async (userId) => {
+  try {
+    return await (await database.ref("srijan/profile/" + userId + "/events").once('value')).val();
   } catch (err) {
     console.log(err);
   }
@@ -22,13 +28,12 @@ export const getUserInfo = async (userId) => {
 
 export const writeUserData = async (userId, userName, email, year, department, college) => {
   try {
-    firestore.collection('users').doc(userId).set({
-      username: userName,
+    database.ref("srijan/profile/" + userId + "/parentprofile").set({
+      name: userName,
       email: email,
       year: year,
-      department: department,
-      college: college,
-      registeredEvents: []
+      course: department,
+      college: college
     })
   } catch (err) {
     console.log(err);
@@ -37,14 +42,13 @@ export const writeUserData = async (userId, userName, email, year, department, c
 
 export const updateUserData = async (userId, year, department, college) => {
   try {
-    const userDetails = await getUserInfo(userId);
     const updatedUserDetails = {
-      ...userDetails,
+      updatetime: firebase.database.ServerValue.TIMESTAMP,
       year: year,
-      department: department,
+      course: department,
       college: college
     }
-    firestore.collection('users').doc(userId).update(updatedUserDetails);
+    database.ref("srijan/profile/" + userId + "/parentprofile").update(updatedUserDetails);
   } catch (err) {
     console.log(err);
   }
@@ -52,8 +56,9 @@ export const updateUserData = async (userId, year, department, college) => {
 
 export const getEventData = async (eventID) => {
   try {
-    const eventRef = await firestore.collection('events').doc(eventID).get();
-    return eventRef.data();
+    const eventRef = await database.ref("srijan/events/" + eventID).once('value');
+    const eventData = eventRef.val();
+    return eventData;
   } catch (err) {
     console.log(err);
   }
@@ -61,13 +66,8 @@ export const getEventData = async (eventID) => {
 
 export const getEvents = async () => {
   try {
-    const querySnapshot = await firestore.collection('events').get();
-    return querySnapshot.docs.map(doc => {
-      return {
-        id: doc.id,
-        ...doc.data()
-      }
-    });
+    const querySnapshot = await database.ref("srijan/events").once('value');
+    return querySnapshot.val();
   } catch (err) {
     console.log(err);
   }

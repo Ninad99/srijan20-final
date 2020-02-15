@@ -13,10 +13,12 @@ const Profile = props => {
   const { currentUser } = useContext(AuthContext);
   let yearDisplay = null;
 
+  const yearSuffix = ["st", "nd", "rd", "th", "th"];
+
   const handleSubmit = e => {
     e.preventDefault();
     const { year, college, department } = e.target.elements;
-    updateUserData(currentUser.uid, year.value, department.value, college.value);
+    updateUserData(currentUser.uid, year.value + yearSuffix[year.value-1], department.value, college.value);
     notification['success']({
       message: 'Success!',
       description: 'Your profile has been updated!',
@@ -29,7 +31,7 @@ const Profile = props => {
       .then(user => {
         setUserInfo(user);
         setInputYear(user.year);
-        setInputDepartment(user.department);
+        setInputDepartment(user.course);
         setInputCollege(user.college);
         setIsLoading(false);
       })
@@ -56,7 +58,7 @@ const Profile = props => {
                     className="profile-input"
                     name="username"
                     disabled
-                    value={userInfo.username}
+                    value={userInfo.name}
                     prefix={<Icon type="user" style={{ color: '#00ebff' }} />}
                     placeholder="Name" />
                 </Form.Item>
@@ -110,7 +112,7 @@ const Profile = props => {
           <Card title="Your Info" className="user-card">
             <div className="user-card-content">
               <Avatar size={90} icon="user" className="user-avatar" />
-              <h2 style={{ color: '#00ebff' }}>{userInfo.username}</h2>
+              <h2 style={{ color: '#00ebff' }}>{userInfo.name}</h2>
               <h3 style={{ color: '#00ebff' }}>{inputCollege}</h3>
               <h4 style={{ color: '#00ebff' }}>Department of {inputDepartment}</h4>
               {yearDisplay}

@@ -46,7 +46,6 @@ const Merchandise = () => {
           window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
         })
         .catch(err => console.log(err));
-      console.log(data);
     } else {
       setFormError(true);
       setIsLoading(false);
@@ -78,7 +77,7 @@ const Merchandise = () => {
                       className="merchandise-input"
                       name="username"
                       disabled
-                      value={userInfo.username}
+                      value={userInfo.name}
                       prefix={<Icon type="user" style={{ color: '#00ebff' }} />}
                       placeholder="Name" />
                   </Form.Item>

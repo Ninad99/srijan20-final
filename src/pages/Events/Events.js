@@ -10,7 +10,11 @@ const Events = props => {
   useEffect(() => {
     getEvents()
       .then(data => {
-        setFetchedEvents(data);
+        const events = [];
+        for (const eventId in data) {
+          events.push(data[eventId]);
+        }
+        setFetchedEvents(events);
       })
   }, [])
 
@@ -29,15 +33,15 @@ const Events = props => {
                     <div className="events-card-header">
                       <div style={{ width: '100%' }}>
                         <img
-                          alt={ev.eventName + " poster"}
-                          src={ev.photoURL}
+                          alt={ev.name + " poster"}
+                          src={ev.poster}
                           style={{ width: '100%' }}/>
                       </div>
                     </div>
                     <div className="events-card-content">
-                      <strong style={{ color: '#00ebff', fontSize: '1.2rem' }}>{ev.eventName}</strong>
-                      <small style={{ color: '#00ebff', textTransform: 'uppercase' }}>({ev.eventType})</small>
-                      <Link to={"/app/events/" + ev.id} className="events-card-visit-btn"><Icon type="export" />&nbsp;Visit page</Link>
+                      <strong style={{ color: '#00ebff', fontSize: '1.2rem' }}>{ev.name}</strong>
+                      <small style={{ color: '#00ebff', textTransform: 'uppercase' }}>({ev.type})</small>
+                      <Link to={"/app/events/" + ev.code} className="events-card-visit-btn"><Icon type="export" />&nbsp;Visit page</Link>
                     </div>
                   </div>
                 ))}
@@ -45,7 +49,7 @@ const Events = props => {
               More events coming soon!
             </Card>
           </Col>
-        ) : <Col span={24} className="flex-container" ><Spin /></Col>}
+                ) : <Col span={24} className="flex-container" ><Spin /></Col>}
       </Row>
     </section>
   );
