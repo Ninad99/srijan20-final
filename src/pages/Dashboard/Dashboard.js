@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
-import { getUserInfo, getEventData, getUserEvents } from '../../firebase/utility';
+import { getUserInfo, getUserEvents } from '../../firebase/utility';
 import { Row, Col, Card, Spin } from 'antd';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import './Dashboard.css';
