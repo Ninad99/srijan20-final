@@ -16,6 +16,7 @@ const EventDisplay = (props) => {
   useEffect(() => {
     getEventData(eventName)
       .then(data => {
+        data.eventCoordinators = data.poc.split("\n");
         setEventData(data);
         // if (data.registeredUsers.includes(currentUser.uid)) {
         //   setIsRegistered(true);
@@ -55,21 +56,21 @@ const EventDisplay = (props) => {
             <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
-                title={eventData.eventName}>
+                title={eventData.name}>
               <Row>
                 <Col md={24} className="d-flex justify-content-center align-items-center eventInfo">
                   <p style={{ color: '#00ebff', textAlign: 'left' }}>
-                    {eventData.eventDate ? <><strong><Icon type="calendar" /> Date: {eventData.eventDate}</strong><br /><br /></> : null}
-                    {eventData.eventTime ? <><strong><Icon type="clock-circle" /> Time: {eventData.eventTime}</strong><br /><br/></> : null}
+                    {eventData.date ? <><strong><Icon type="calendar" /> Date: {eventData.date}</strong><br /><br /></> : null}
+                    {eventData.time ? <><strong><Icon type="clock-circle" /> Time: {eventData.time}</strong><br /><br/></> : null}
                     <strong><Icon type="info-circle" /> Description: </strong><br />
-                    {eventData.eventDescription}
+                    {eventData.desc}
                   </p>
                 </Col>
                 <Col md={24}>
                   <Row>
                     <Col lg={16}>
                       <div className="event-img-container">
-                        <img src={eventData.photoURL ? eventData.photoURL : "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feagleeyevr.com%2Fwp-content%2Fuploads%2F2017%2F04%2Ftypes-of-drones.png&f=1&nofb=1"} alt={eventName}></img>
+                        <img src={eventData.poster ? eventData.poster : "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feagleeyevr.com%2Fwp-content%2Fuploads%2F2017%2F04%2Ftypes-of-drones.png&f=1&nofb=1"} alt={eventName}></img>
                       </div>
                     </Col>
                     <Col lg={8}>

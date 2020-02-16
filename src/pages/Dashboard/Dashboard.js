@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
-import { getUserInfo, getEventData } from '../../firebase/utility';
+import { getUserInfo, getEventData, getUserEvents } from '../../firebase/utility';
 import { Row, Col, Card, Spin } from 'antd';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import './Dashboard.css';
@@ -15,19 +15,16 @@ const Dashboard = props => {
     getUserInfo(currentUser.uid)
       .then(async userDetails => {
         setUserInfo(userDetails)
-        if (userDetails.registeredEvents.length > 0) {
-          const userEvents = [];
-          for (const ev of userDetails.registeredEvents) {
-            try {
-              const eventData = await getEventData(ev);
-              userEvents.push(eventData);
-            } catch (err) {
-              console.log(err);
-            }
-          }
-          console.log(userEvents);
-          setUserEvents(userEvents);
+      })
+      .catch(err => console.log(err));
+    
+      getUserEvents(currentUser.uid)
+      .then(async userEvents => {
+        const events = [];
+        for (const eventId in userEvents) {
+          events.push(userEvents[eventId]);
         }
+        setUserEvents(events);
       })
       .catch(err => console.log(err));
   }, [currentUser.uid])
@@ -41,7 +38,7 @@ const Dashboard = props => {
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
                 title="Your registered events">
-            {userInfo.registeredEvents.length === 0 ? (
+            {userEvents.length === 0 ? (
               <div style={{ padding: '2rem 0', color: '#00ebff' }}>
                 <strong>You have not registered for any events yet</strong>
               </div>
@@ -52,17 +49,17 @@ const Dashboard = props => {
                   <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                         bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
                         style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                        size="small" title={ev.eventName}
+                        size="small" title={ev.event}
                         cover={
                           <div style={{ width: '100%', padding: 0 }}>
                             <img
                               alt="example"
-                              src={ev.photoURL ? ev.photoURL : "https://robohash.org/" + ev.id}
+                              src={ev.poster ? ev.poster : "https://robohash.org/" + ev.code}
                               style={{ width: '100%', height: '40%' }}/>
                           </div>
                         }>
                     <Meta
-                        title={<span style={{ color: "#00ebff", textTransform: 'uppercase' }}>Event type - {ev.eventType}</span>}/>
+                        title={<span style={{ color: "#00ebff", textTransform: 'uppercase' }}>Team: {ev.team}</span>}/>
                   </Card>
                 </li>
               ))}

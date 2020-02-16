@@ -95,7 +95,7 @@ const Merchandise = () => {
                       className="merchandise-input"
                       name="username"
                       disabled
-                      value={userInfo.username}
+                      value={userInfo.name}
                       prefix={<Icon type="user" style={{ color: '#00ebff' }} />}
                       placeholder="Name" />
                   </Form.Item>
