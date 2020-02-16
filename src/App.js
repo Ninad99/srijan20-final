@@ -9,11 +9,17 @@ import PrivateRoute from './hoc/PrivateRoute';
 import LandingPage from './pages/Landing/Landing';
 import AppLayout from './layout/AppLayout';
 
+let lastLocation;
+
 const App = props => {
   const { history } = props;
   const { currentUser } = useContext(AuthContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState('');
+
+  const setLastLocation = (updatedLocation) => {
+    lastLocation = updatedLocation;
+  }
 
   useEffect(() => {
     if (currentUser) {
@@ -21,7 +27,7 @@ const App = props => {
         .then(usr => {
           setUserName(usr);
           setIsAuthenticated(true);
-          history.push('/app/dashboard');
+          history.push(lastLocation);
           notification['success']({
             message: `Logged in as ${usr}`,
             duration: 2
@@ -48,7 +54,12 @@ const App = props => {
   return (
     <Switch>
       <Route path='/' exact render={props => <LandingPage isAuthenticated={isAuthenticated} username={userName} />} />
-      <PrivateRoute component={AppLayout} path='/app' username={userName} handleSignOut={handleSignOut} />
+      <PrivateRoute
+        component={AppLayout}
+        path='/app'
+        username={userName}
+        handleSignOut={handleSignOut}
+        setLastLocation={setLastLocation} />
       <Redirect from='*' to='/' />
     </Switch>
   );
