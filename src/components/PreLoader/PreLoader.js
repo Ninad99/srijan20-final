@@ -9,7 +9,7 @@ const PreLoader = props => {
 
   useEffect(() => {
     let count = 0, timeout;    
-    const id = setInterval(updateProgress, 40);
+    const id = setInterval(updateProgress, 25);
 
     function updateProgress() {
       count++;
