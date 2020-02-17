@@ -33,7 +33,8 @@ export const writeUserData = async (userId, userName, email, year, department, c
       email: email,
       year: year,
       course: department,
-      college: college
+      college: college,
+      complete: 1
     })
   } catch (err) {
     console.log(err);
@@ -46,7 +47,8 @@ export const updateUserData = async (userId, year, department, college) => {
       updatetime: firebase.database.ServerValue.TIMESTAMP,
       year: year,
       course: department,
-      college: college
+      college: college,
+      complete: 1
     }
     database.ref("srijan/profile/" + userId + "/parentprofile").update(updatedUserDetails);
   } catch (err) {
