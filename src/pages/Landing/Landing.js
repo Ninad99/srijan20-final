@@ -10,6 +10,7 @@ import './Landing.css';
 import LoginForm from '../../components/Login/Login';
 import RegisterForm from '../../components/Register/Register';
 import PreLoader from '../../components/PreLoader/PreLoader';
+import PasswordResetForm from '../../components/PasswordResetForm/PasswordResetForm';
 
 const { Title } = Typography;
 
@@ -86,9 +87,9 @@ const Landing = props => {
             )}
           </div>
         </div>) : null}
-      {showForm === 'login' ? <LoginForm setShowForm={setShowForm} /> : (
-        showForm === 'register' ? <RegisterForm setShowForm={setShowForm} /> : null
-      )}
+      {showForm === 'login' ? <LoginForm setShowForm={setShowForm} /> : null }
+      {showForm === 'register' ? <RegisterForm setShowForm={setShowForm} /> : null }
+      {showForm === 'forgot-password' ? <PasswordResetForm /> : null}
     </section>
   )
 }
