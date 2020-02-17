@@ -74,7 +74,7 @@ const Mementos = (props) => {
                       <div>
                         <a href="https://bit.ly/MEMEntos" target="_blank_">
                           <span className="btn">
-                            <p style={{ padding: 0, margin: 0 }}>Register</p>
+                            <p style={{ padding: 0, margin: 0 }}>Submissions</p>
                           </span>
                         </a>
                         <a href="https://bit.ly/mementos_rules" target="_blank_">
