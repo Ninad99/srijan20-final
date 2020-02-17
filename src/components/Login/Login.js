@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Icon, Input, Button, Checkbox, Alert, Spin } from 'antd';
 import firebase from '../../firebase/config';
+import { LastLocationContext } from '../../context/lastLocationContext';
 import './Login.css';
 
 const isValid = (email, passwd) => {
@@ -13,6 +14,7 @@ const isValid = (email, passwd) => {
 
 const Login = props => {
   const { history, setShowForm } = props;
+  const { lastLocation } = useContext(LastLocationContext);
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,12 +34,14 @@ const Login = props => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       setIsLoading(false);
-      history.push('/app/dashboard');
+      if (!lastLocation) {
+        history.push('/app/dashboard');
+      }
     } catch (err) {
       setError(err);
       setIsLoading(false);
     }
-  }, [history]);
+  }, [lastLocation, history]);
 
   const handleSubmit = useCallback(e => {
     e.preventDefault();
