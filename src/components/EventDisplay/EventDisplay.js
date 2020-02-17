@@ -58,7 +58,7 @@ const EventDisplay = (props) => {
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
                 title={eventData.name}>
               <Row>
-                <Col md={24} className="d-flex justify-content-center align-items-center eventInfo">
+                <Col md={24} className="eventInfo">
                   <p style={{ color: '#00ebff', textAlign: 'left' }}>
                     {eventData.date ? <><strong><Icon type="calendar" /> Date: {eventData.date}</strong><br /><br /></> : null}
                     {eventData.time ? <><strong><Icon type="clock-circle" /> Time: {eventData.time}</strong><br /><br/></> : null}
@@ -70,7 +70,7 @@ const EventDisplay = (props) => {
                   <Row>
                     <Col lg={16}>
                       <div className="event-img-container">
-                        <img src={eventData.poster ? eventData.poster : "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feagleeyevr.com%2Fwp-content%2Fuploads%2F2017%2F04%2Ftypes-of-drones.png&f=1&nofb=1"} alt={eventName}></img>
+                        <img src={eventData.poster} alt={eventName + " poster"}></img>
                       </div>
                     </Col>
                     <Col lg={8}>
