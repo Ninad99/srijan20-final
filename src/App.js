@@ -13,7 +13,7 @@ import AppLayout from './layout/AppLayout';
 const App = props => {
   const { history } = props;
   const { currentUser } = useContext(AuthContext);
-  const { lastLocation, setLastLocation } = useContext(LastLocationContext);
+  const { lastLocation } = useContext(LastLocationContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState('');
 
@@ -56,8 +56,7 @@ const App = props => {
         component={AppLayout}
         path='/app'
         username={userName}
-        handleSignOut={handleSignOut}
-        setLastLocation={setLastLocation} />
+        handleSignOut={handleSignOut} />
       <Redirect from='*' to='/' />
     </Switch>
   );
