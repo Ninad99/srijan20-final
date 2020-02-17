@@ -41,3 +41,19 @@
 .icons:hover{
   color: #ffae00!important;
 }
+
+.dashboard-app-section {
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  color: #00ebff;
+}
+
+.dashboard-app-section .dashboard-app-img-container {
+  width: 100%;
+  margin-bottom: .75rem;
+}
+
+.dashboard-app-section .dashboard-app-img-container img {
+  width: 100%;
+}

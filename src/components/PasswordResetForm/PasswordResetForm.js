@@ -22,14 +22,14 @@ const PasswordReset = props => {
     if (isValid(email.value)) {
       try {
         const userSignInMethods = await firebase.auth().fetchSignInMethodsForEmail(email.value);
-        if (userSignInMethods.length !== 0) {
+        if (userSignInMethods.includes('password')) {
           await firebase.auth().sendPasswordResetEmail(email.value);
           setIsLoading(false);
           setFormError(false);
           setMailSent(true);
         } else {
           setIsLoading(false);
-          setError({ message: "User doesn't exist for the given email" });
+          setError({ message: "User doesn't exist for the given email or you may have used an alternate signin option" });
         }
       } catch (err) {
         setError(true);
