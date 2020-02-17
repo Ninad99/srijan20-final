@@ -164,12 +164,12 @@ const Workshops = props => {
                 <p>"No matter who you are, every day of your life, you are sitting in a database just ready to be looked at"
                         - Edward Snowden<br /><br/>
 
-                  With trillian dollar corporations selling away the privacy of billions of people, cyber security is much more than a sub-division in the field of IT. It is the modern man's strongest weapon against corporate spies. To fight these crimes against a person's right to privacy, team SRIJAN'20 is proud to introduce JU's first ever 'Ethical Hacking and Cyber Security' community.
+                  With trillion dollar corporations selling away the privacy of billions of people, cyber security is much more than a sub-division in the field of IT. It is the modern man's strongest weapon against corporate spies. To fight these crimes against a person's right to privacy, team SRIJAN'20 is proud to introduce JU's first ever 'Ethical Hacking and Cyber Security' community.
                   <br/>This will be three-month interaction and learning period with the first session on 22nd of February in the Teqip building, Jadavpur University. In the end, during your sem break, <strong>we will hire the top performers to work on live projects of various companies and intern with us. With industry-based tie-ups with companies (for security reasons we are not allowed to disclose the name of our clients which includes some of the top MNCs) as well as government partnerships, we'd provide a wide array of corporate as well as government projects for the interns to work upon.</strong> Registration open to all age groups, from all colleges.
                   <br /><br />If you value your privacy, then DO NOT MISS OUT! Let's work our way towards a safe and secure world.
                   <br />
-                  Chief Mentor- Sohang sengupta-  Founder-Zero Dollar Security,Head of Information security- cemX, RSA security, DEL EMC, ITC Infotech, Top 30 KWHS young lead selected around the world by University of Pennsylvania, Wharton school of business, Red hat certified.
-                  <br />
+                  Chief Mentor - <strong>Sohang Sengupta</strong> <br />Founder - Zero Dollar Security, Head of Information security - cemX, RSA security, DEL EMC, ITC Infotech, Top 30 KWHS young lead selected around the world by University of Pennsylvania, Wharton school of business, Red hat certified.
+                  <br /><br />
                   Registration fees for the first 3 months - &#8377;700 (refundable) 
                 </p>
                 <div>
