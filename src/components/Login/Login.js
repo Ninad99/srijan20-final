@@ -75,7 +75,8 @@ const Login = props => {
       </Button>&nbsp;&nbsp;&nbsp;
       {isLoading ? <Spin /> : null}
       <br /><br />
-      <span className="mock-form-link" onClick={e => setShowForm('register')}>Create an account</span>
+      <span className="mock-form-link" onClick={e => setShowForm('register')}>Create an account</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+      <span className="mock-form-link" onClick={e => setShowForm('forgot-password')}>Forgot/Reset Password?</span>
       <hr />
       <div className="altSignIn" onClick={handleGoogleSignIn}>
         <Icon type="google" /> Sign In with Google
