@@ -182,7 +182,7 @@ const Workshops = props => {
                       <p style={{ padding: 0, margin: 0 }}>Register</p>
                     </span>
                   )}
-                  <a href="../../assets/docs/ethical_hacking_workshop.pdf" download>
+                  <a target="_about" href="https://firebasestorage.googleapis.com/v0/b/srijanju20.appspot.com/o/ethical_hacking_workshop.pdf?alt=media&token=ee46d3e3-08a5-49db-91ce-07bc24a3d73a" download>
                     <span className="btn">
                       <p style={{ padding: 0, margin: 0 }}>Learn More</p>
                     </span>
