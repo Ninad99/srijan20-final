@@ -4,6 +4,7 @@ import { Layout, Dropdown, Menu, Drawer, Icon } from 'antd';
 import { routes } from '../routes';
 import Particles from 'react-particles-js';
 import EventDisplay from '../components/EventDisplay/EventDisplay';
+import Mementos from '../components/Mementos/Mementos';
 import srijanLogoWhite from '../assets/Images/srijan_logo_white.png';
 import srijanLogoBlack from '../assets/Images/srijan_logo_black.png';
 import './AppLayout.css';
@@ -109,6 +110,7 @@ const AppLayout = props => {
               {routes.map((route, index) => {
                 return <Route key={index} path={route.layout + route.path} exact component={route.component} />
               })}
+              <Route path='/app/events/mementos' exact render={props => <Mementos {...props} />} />
               <Route path='/app/events/:eventName' exact render={props => <EventDisplay {...props} />} />
             </RouteSwitch>
             <Footer className="footer">
