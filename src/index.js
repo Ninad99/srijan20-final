@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import AuthContextProvider from './context/authContext';
+import LastLocationProvider from './context/lastLocationContext';
 
 require('dotenv').config();
 
 ReactDOM.render(
   <BrowserRouter>
     <AuthContextProvider>
-      <App />
+      <LastLocationProvider>
+        <App />
+      </LastLocationProvider>
     </AuthContextProvider>
   </BrowserRouter>, document.getElementById('root'));
