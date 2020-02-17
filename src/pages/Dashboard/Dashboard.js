@@ -3,6 +3,8 @@ import { AuthContext } from '../../context/authContext';
 import { getUserInfo, getUserEvents } from '../../firebase/utility';
 import { Row, Col, Card, Spin } from 'antd';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
+import SrijanAppImage from '../../assets/Images/app.png';
+import GooglePlayBadge from '../../assets/Images/google-play-badge.png';
 import './Dashboard.css';
 const { Meta } = Card;
 
@@ -79,11 +81,16 @@ const Dashboard = props => {
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
-          <Card title="Your participation in Srijan 20"
+          <Card title="Download the official Srijan 20 app"
                 headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
-                style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color: '#00ebff' }}>
-            This section will be updated soon!
+                className="dashboard-app-section">
+            <div className="dashboard-app-img-container">
+              <img alt="Srijan 20 app" src={SrijanAppImage} />
+            </div>
+            <a href='https://play.google.com/store/apps/details?id=in.srijanju.androidapp&hl=en_us&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+              <img alt='Get it on Google Play' src={GooglePlayBadge} width="175px"/>
+            </a>
           </Card>
         </Col>
       </Row>
