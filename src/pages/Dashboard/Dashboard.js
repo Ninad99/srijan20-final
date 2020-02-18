@@ -3,7 +3,7 @@ import { AuthContext } from '../../context/authContext';
 import { getUserInfo, getUserEvents } from '../../firebase/utility';
 import { Row, Col, Card, Spin } from 'antd';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
-import SrijanAppImage from '../../assets/Images/app.png';
+import SrijanAppImage from '../../assets/Images/app-min.png';
 import GooglePlayBadge from '../../assets/Images/google-play-badge.png';
 import './Dashboard.css';
 const { Meta } = Card;
