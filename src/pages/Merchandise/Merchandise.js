@@ -28,45 +28,45 @@ const Merchandise = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setIsLoading(true);
-    // const { username, department, college, year, email, printName, phoneNumber } = event.target.elements;
-    // if (isValid(department.value, college.value, email.value, year.value, printName.value, phoneNumber.value)) {
-    //   confirm({
-    //     title: 'Submit order request with given data?',
-    //     onOk() {
-    //       setCheckoutDisabled(true);
-    //       const date = new Date();
-    //       const data = {
-    //         date: date.toDateString() + " " + date.toTimeString(),
-    //         name: username.value,
-    //         department: department.value,
-    //         college: college.value,
-    //         year: year.value,
-    //         email: email.value,
-    //         printName: printName.value,
-    //         phoneNo: phoneNumber.value,
-    //         paymentStatus: "pending",
-    //         size: size,
-    //         userId: currentUser.uid,
-    //         amount: 300
-    //       }
-    //       firestore.collection('orders').add(data)
-    //         .then(docRef => {
-    //           setCheckoutDisabled(false);
-    //           window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
-    //         })
-    //         .catch(err => console.log(err));
-    //     },
-    //     onCancel() {
-    //       setCheckoutDisabled(false);
-    //       setIsLoading(false);
-    //     },
-    //   });
-    // } else {
-    //   setCheckoutDisabled(false);
-    //   setFormError(true);
-    //   setIsLoading(false);
-    // }
+    setIsLoading(true);
+    const { username, department, college, year, email, printName, phoneNumber } = event.target.elements;
+    if (isValid(department.value, college.value, email.value, year.value, printName.value, phoneNumber.value)) {
+      confirm({
+        title: 'Submit order request with given data?',
+        onOk() {
+          setCheckoutDisabled(true);
+          const date = new Date();
+          const data = {
+            date: date.toDateString() + " " + date.toTimeString(),
+            name: username.value,
+            department: department.value,
+            college: college.value,
+            year: year.value,
+            email: email.value,
+            printName: printName.value,
+            phoneNo: phoneNumber.value,
+            paymentStatus: "manual-payment",
+            size: size,
+            userId: currentUser.uid,
+            amount: 300
+          }
+          firestore.collection('orders').add(data)
+            .then(docRef => {
+              setCheckoutDisabled(false);
+              window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
+            })
+            .catch(err => console.log(err));
+        },
+        onCancel() {
+          setCheckoutDisabled(false);
+          setIsLoading(false);
+        },
+      });
+    } else {
+      setCheckoutDisabled(false);
+      setFormError(true);
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -90,8 +90,6 @@ const Merchandise = () => {
                 <Form onSubmit={handleSubmit} layout="horizontal" className="merchandise-form">
                   {formError ? <Alert message="Form fields can't be blank!" type="error" /> : null}
                   <br />
-                  <Alert message="We aren't accepting t-shirt orders right now. We will update soon. Download our android app to get updates" type="error" />
-                  <br/>
                   <Form.Item label="Name" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
                     <Input
                       className="merchandise-input"
@@ -156,8 +154,8 @@ const Merchandise = () => {
                       <Radio value="2XL">2XL</Radio>
                     </Radio.Group>
                   </Form.Item>
-                  <Button htmlType="submit" className="merchandise-submit-btn" style={{ color: '#00ebff' }} disabled={true}>
-                    Proceed to checkout&nbsp;&nbsp;{isLoading ? <Spin /> : null}
+                  <Button htmlType="submit" className="merchandise-submit-btn" style={{ color: '#00ebff' }} disabled={checkoutDisabled}>
+                    Submit&nbsp;&nbsp;{isLoading ? <Spin /> : null}
                   </Button>
                 </Form>
               ) : <Spin />}

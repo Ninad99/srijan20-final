@@ -36,37 +36,36 @@ const Workshops = props => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setIsLoading(true);
-    // const { username, department, college, year, email, phoneNumber } = event.target.elements;
-    // if (isValid(department.value, college.value, year.value, phoneNumber.value)) {
-    //   setCheckoutDisabled(true);
-    //   const date = new Date();
-    //   const data = {
-    //     date: date.toDateString() + " " + date.toTimeString(),
-    //     name: username.value,
-    //     department: department.value,
-    //     college: college.value,
-    //     year: year.value,
-    //     email: email.value,
-    //     phoneNo: phoneNumber.value,
-    //     paymentStatus: "pending",
-    //     userId: currentUser.uid,
-    //     amount: 700
-    //   }
-    //   firestore.collection('workshopOrders').add(data)
-    //     .then(docRef => {
-    //       window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/workshops/txn?orderId=${docRef.id}&amount=700`;
-    //     })
-    //     .catch(err => console.log(err));
-    //   console.log(data);
-    // } else {
-    //   setCheckoutDisabled(false);
-    //   setFormError(true);
-    //   setIsLoading(false);
-    // }
+    setIsLoading(true);
+    const { username, department, college, year, email, phoneNumber } = event.target.elements;
+    if (isValid(department.value, college.value, year.value, phoneNumber.value)) {
+      setCheckoutDisabled(true);
+      const date = new Date();
+      const data = {
+        date: date.toDateString() + " " + date.toTimeString(),
+        name: username.value,
+        department: department.value,
+        college: college.value,
+        year: year.value,
+        email: email.value,
+        phoneNo: phoneNumber.value,
+        paymentStatus: "manual-payment",
+        userId: currentUser.uid,
+        amount: 700
+      }
+      firestore.collection('workshopOrders').add(data)
+        .then(docRef => {
+          window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/workshops/txn?orderId=${docRef.id}&amount=700`;
+        })
+        .catch(err => console.log(err));
+    } else {
+      setCheckoutDisabled(false);
+      setFormError(true);
+      setIsLoading(false);
+    }
   }
 
-  const showModal = () => setModalVisible(false); // TODO: revert
+  const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
 
   return (
@@ -143,7 +142,7 @@ const Workshops = props => {
                       placeholder="Phone no." />
                   </Form.Item>
                   <Button htmlType="submit" className="workshop-submit-btn" style={{ color: '#222' }} disabled={checkoutDisabled}>
-                    Proceed to checkout&nbsp;&nbsp;{isLoading ? <Spin /> : null}
+                    Submit&nbsp;&nbsp;{isLoading ? <Spin /> : null}
                   </Button>
                 </Form>
               ) : <Spin />}
@@ -172,7 +171,6 @@ const Workshops = props => {
                   <br /><br />
                   Registration fees for the first 3 months - &#8377;700 (refundable) 
                 </p>
-                <Alert message="We aren't accepting t-shirt orders right now. We will update soon. Download our android app to get updates" type="error" />
                 <br/>
                 <div>
                   {isRegistered ? (
