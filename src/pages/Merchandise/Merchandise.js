@@ -8,8 +8,8 @@ import './Merchandise.css';
 
 const { confirm } = Modal;
 
-const isValid = (department, college, year, printName, phoneNo) => {
-  return (department !== "") && (college !== "") && (year !== "") && (printName !== "") && (phoneNo !== "");
+const isValid = (department, college, email, year, printName, phoneNo) => {
+  return (department !== "") && (college !== "") && (email !== "") && (year !== "") && (printName !== "") && (phoneNo !== "");
 }
 
 const Merchandise = () => {
@@ -30,7 +30,7 @@ const Merchandise = () => {
     event.preventDefault();
     setIsLoading(true);
     const { username, department, college, year, email, printName, phoneNumber } = event.target.elements;
-    if (isValid(department.value, college.value, year.value, printName.value, phoneNumber.value)) {
+    if (isValid(department.value, college.value, email.value, year.value, printName.value, phoneNumber.value)) {
       confirm({
         title: 'Submit order request with given data?',
         onOk() {
@@ -127,8 +127,6 @@ const Merchandise = () => {
                       className="merchandise-input"
                       name="email"
                       type="email"
-                      disabled
-                      value={userInfo.email}
                       prefix={<Icon type="mail" style={{ color: '#00ebff' }} />}
                       placeholder="Email" />
                   </Form.Item>
