@@ -74,3 +74,8 @@ export const getEvents = async () => {
     console.log(err);
   }
 }
+
+export const getUserIdFromEmail = async (email) => {
+  const snapshot = await database.ref("srijan/profile").orderByChild('parentprofile/email').equalTo(email).once('value');
+  return Object.keys(snapshot.val())[0];
+}
