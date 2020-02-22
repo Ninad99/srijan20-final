@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Input, Alert, Spin, Icon, Button, Modal } from 'antd';
 
-const isValid = (teamName, leader, leaderPhone) => {
-  return (teamName !== "") && (leader !== "") && (leaderPhone !== "");
-}
-
 const EventRegistrationForm = props => {
-  const { handleEventRegister, modalVisible, hideModal, eventName, isLoading, setIsLoading, minMembers, maxMembers } = props;
+  const {
+    handleEventRegister,
+    modalVisible,
+    hideModal,
+    eventName,
+    isLoading,
+    setIsLoading,
+    minMembers,
+    maxMembers,
+    leaderEmail 
+  } = props;
   const [formError, setFormError] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
@@ -15,21 +21,19 @@ const EventRegistrationForm = props => {
     setFormError(false);
     setIsLoading(true);
     setSubmitDisabled(true);
-    const { teamname, leader, leaderPhone, member2, member3 } = e.target.elements;
-    if (isValid(teamname.value, leader.value, leaderPhone.value)) {
-      handleEventRegister(teamname.value, leader.value, leaderPhone.value, member2.value, member3.value)
-        .then(data => {
-          console.log(data);
-          hideModal();
-          setIsLoading(false);
-          setSubmitDisabled(false);
-        })
-        .catch(err => console.log(err));
-    } else {
-      setFormError(true);
-      setIsLoading(false);
-      setSubmitDisabled(false);
-    }
+    const { teamname, leader, leaderPhone, member2, member3, member4, member5 } = e.target.elements;
+    handleEventRegister(teamname.value, leader.value, leaderPhone.value, member2.value, member3.value, member4.value, member5.value)
+      .then(data => {
+        console.log(data);
+        hideModal();
+        setIsLoading(false);
+        setSubmitDisabled(false);
+      })
+      .catch(err => {
+        setFormError(err)
+        setIsLoading(false);
+        setSubmitDisabled(false);
+      });
   }
 
   return (
@@ -45,9 +49,8 @@ const EventRegistrationForm = props => {
       </Button>
     ]}>
     <Form onSubmit={checkValid} layout="horizontal" name="modalForm" className="workshop-form">
-      {formError ? <Alert message="Form fields can't be blank!" type="error" /> : null}
-      <br />
-      <p>A team for this event consists of a minimum of {minMembers} member(s) and a maximum of {maxMembers} members</p>
+      <p>A team for this event consists of a minimum of {minMembers} member(s) and a maximum of {maxMembers} members. Fill the remaining input fields with the emails of your team members (according to your team size) otherwise leave it blank.</p>
+      {formError ? <Alert message={formError.message} type="error" /> : null}
       <Form.Item label="Team name" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
           required
@@ -58,6 +61,8 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team leader email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
+          disabled
+          value={leaderEmail}
           className="event-reg-input"
           name="leader"
           type="email"
@@ -75,6 +80,7 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team member 2 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
+          required={minMembers > 1 && minMembers <= 3}
           className="event-reg-input"
           name="member2"
           type="email"
@@ -83,11 +89,30 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team member 3 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
+          required={minMembers > 2 && minMembers <= 3}
           className="event-reg-input"
           name="member3"
           type="email"
           prefix={<Icon type="mail" style={{ color: '#222' }} />}
           placeholder="Team member 3 email" />
+      </Form.Item>
+      <Form.Item label="Team member 4 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+        <Input
+          disabled={maxMembers < 4}
+          className="event-reg-input"
+          name="member4"
+          type="email"
+          prefix={<Icon type="mail" style={{ color: '#222' }} />}
+          placeholder="Team member 4 email" />
+      </Form.Item>
+      <Form.Item label="Team member 5 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+        <Input
+          disabled={maxMembers < 5}
+          className="event-reg-input"
+          name="member5"
+          type="email"
+          prefix={<Icon type="mail" style={{ color: '#222' }} />}
+          placeholder="Team member 5 email" />
       </Form.Item>
       <Button htmlType="submit" className="workshop-submit-btn" style={{ color: '#222' }} disabled={submitDisabled}>
         Submit&nbsp;&nbsp;{isLoading ? <Spin /> : null}
