@@ -10,6 +10,14 @@ export const getUsernameFromDatabase = async (userId) => {
   }
 }
 
+export const getUserData = async (userId) => {
+  try {
+    return await (await database.ref("srijan/profile/" + userId).once('value')).val();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export const getUserInfo = async (userId) => {
   try {
     return await (await database.ref("srijan/profile/" + userId + "/parentprofile").once('value')).val();
@@ -77,5 +85,8 @@ export const getEvents = async () => {
 
 export const getUserIdFromEmail = async (email) => {
   const snapshot = await database.ref("srijan/profile").orderByChild('parentprofile/email').equalTo(email).once('value');
+  if (!snapshot.val()) {
+    return null;
+  }
   return Object.keys(snapshot.val())[0];
 }
