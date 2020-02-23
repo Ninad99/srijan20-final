@@ -63,7 +63,6 @@ const Events = props => {
                   </div>
                 ))}
               </div>
-              More events coming soon!
             </Card>
           </Col>
         ) : <Col span={24} className="flex-container" ><Spin /></Col>}
