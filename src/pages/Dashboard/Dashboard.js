@@ -10,21 +10,12 @@ const { Meta } = Card;
 
 const Dashboard = props => {
   const { currentUser } = useContext(AuthContext);
-  // const [userInfo, setUserInfo] = useState(null);
   const [userEvents, setUserEvents] = useState(null);
 
   useEffect(() => {
-    // getUserInfo(currentUser.uid)
-    //   .then(async userDetails => {
-    //     console.log(userDetails);
-    //     setUserInfo(userDetails)
-    //   })
-    //   .catch(err => console.log(err));
-    
     getUserEvents(currentUser.uid)
       .then(async userEvents => {
         const events = [];
-        console.log(userEvents);
         for (const eventId in userEvents) {
           events.push(userEvents[eventId]);
         }
