@@ -63,7 +63,7 @@ const Dashboard = props => {
                 headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
-            <DoughnutChart data={[3, 1, 4, 1, 1, 3]} labels={['Coding', 'Gaming', 'Robotics', 'Photography', 'Quiz', 'Misc']} />
+            <DoughnutChart data={[3, 4, 3, 1, 2, 4, 2]} labels={['Coding', 'Gaming', 'Robotics', 'Photography', 'Quiz', 'Misc', 'Fun']} />
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
