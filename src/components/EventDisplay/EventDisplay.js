@@ -20,8 +20,10 @@ const EventDisplay = (props) => {
   useEffect(() => {
     getEventData(eventName)
       .then(data => {
-        data.eventCoordinators = data.poc.split("\n");
-        if (data.rules !== 'none') {
+        if (data.poc) {
+          data.eventCoordinators = data.poc.split("\n");
+        }
+        if (data.rules && data.rules !== 'none' && !data.rules_url) {
           data.eventRules = data.rules.split('\n');
         }
         getUserData(currentUser.uid)
@@ -186,19 +188,32 @@ const EventDisplay = (props) => {
                         return <strong key={index}>{rule}<br /></strong>
                       }) : null}
                       <br />
-                      {eventData.eventCoordinators.map((c, index) => {
+                      {eventData.eventCoordinators ? eventData.eventCoordinators.map((c, index) => {
                         return <strong key={index}><Icon type="phone" /> {c}</strong>
-                      })}
+                      }) : null}
                       <br />
                       {isRegistered ? (
                         <span className="btn">
                           <p style={{ padding: 0, margin: 0 }}>You've registered for this event</p>
                         </span>
                       ) : (
-                        <div className="flex-container">
-                          <span className="btn" onClick={showModal}>
-                            <p style={{ padding: 0, margin: 0 }}>Register</p>
-                          </span>
+                        <div>
+                          {eventData.maxts === 0 ? (
+                            <span className="btn">
+                              <p style={{ padding: 0, margin: 0 }}>Registration for this event hasn't started yet</p>
+                            </span>
+                          ) : (
+                            <span className="btn" onClick={showModal}>
+                              <p style={{ padding: 0, margin: 0 }}>Register</p>
+                            </span>
+                          )}
+                          {eventData.rules_url ? (
+                            <a target="_blank_" href={eventData.rules_url}>
+                              <span className="btn">
+                                <p style={{ padding: 0, margin: 0 }}>Rules</p>
+                              </span>
+                            </a>
+                          ) : null}
                         </div>
                       )}
                     </div>
