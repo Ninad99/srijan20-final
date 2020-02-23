@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Alert, Spin, Icon, Button, Modal } from 'antd';
+import { Form, Input, Alert, Spin, Icon, Button, Modal, notification } from 'antd';
 
 const EventRegistrationForm = props => {
   const {
@@ -11,7 +11,8 @@ const EventRegistrationForm = props => {
     setIsLoading,
     minMembers,
     maxMembers,
-    leaderEmail 
+    leaderEmail,
+    setIsRegistered
   } = props;
   const [formError, setFormError] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -24,10 +25,14 @@ const EventRegistrationForm = props => {
     const { teamname, leader, leaderPhone, member2, member3, member4, member5 } = e.target.elements;
     handleEventRegister(teamname.value, leader.value, leaderPhone.value, member2.value, member3.value, member4.value, member5.value)
       .then(data => {
-        console.log(data);
+        notification['success']({
+          message: `Successfully registered as team ${teamname.value}`,
+          duration: 2
+        })
         hideModal();
         setIsLoading(false);
         setSubmitDisabled(false);
+        setIsRegistered(true);
       })
       .catch(err => {
         setFormError(err)
@@ -51,6 +56,7 @@ const EventRegistrationForm = props => {
     <Form onSubmit={checkValid} layout="horizontal" name="modalForm" className="workshop-form">
       <p>A team for this event consists of a minimum of {minMembers} member(s) and a maximum of {maxMembers} members. Fill the remaining input fields with the emails of your team members (according to your team size) otherwise leave it blank.</p>
       {formError ? <Alert message={formError.message} type="error" /> : null}
+      <hr />
       <Form.Item label="Team name" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
           required
@@ -80,7 +86,7 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team member 2 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
-          required={minMembers > 1 && minMembers <= 3}
+          required={minMembers > 1}
           className="event-reg-input"
           name="member2"
           type="email"
@@ -89,7 +95,7 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team member 3 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
-          required={minMembers > 2 && minMembers <= 3}
+          required={minMembers > 2}
           className="event-reg-input"
           name="member3"
           type="email"
