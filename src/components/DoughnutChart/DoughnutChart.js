@@ -12,7 +12,8 @@ const DoughnutChart = props => {
         '#ffee58',
         '#1a237e',
         '#e91e63',
-        '#ab47bc'
+        '#ab47bc',
+        '#ff5722'
       ],
       borderColor: [
         '#29b6f6',
@@ -20,7 +21,8 @@ const DoughnutChart = props => {
         '#ffee58',
         '#1a237e',
         '#e91e63',
-        '#ab47bc'
+        '#ab47bc',
+        '#ff5722'
       ]
     }],
     labels: props.labels,
