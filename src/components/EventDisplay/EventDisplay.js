@@ -21,6 +21,9 @@ const EventDisplay = (props) => {
     getEventData(eventName)
       .then(data => {
         data.eventCoordinators = data.poc.split("\n");
+        if (data.rules !== 'none') {
+          data.eventRules = data.rules.split('\n');
+        }
         getUserData(currentUser.uid)
           .then(userData => {
             setUserData(userData.parentprofile);
@@ -35,6 +38,22 @@ const EventDisplay = (props) => {
   }, [eventName, currentUser.uid]);
 
   const handleEventRegister = async (teamname, leader, leaderPhone, member2, member3, member4, member5) => {
+    const team = await (await database.ref("srijan/events/" + eventData.code + "/teams/" + teamname).once('value')).val();
+    if (team) {
+      throw new Error("A team with the name " + teamname + " already exists! Please choose another name");
+    }
+
+    const teamnameRegex = /^[a-zA-Z0-9]{3,16}$/;
+    if (!teamnameRegex.test(teamname)) {
+      throw new Error("Invalid team name. Team name should be atleast 3 characters long and can contain letters or numbers");
+    }
+
+    const emails = [leader, member2, member3, member4, member5].filter(item => item !== "");
+    const duplicates = [...new Set(emails.filter((item, index) => emails.indexOf(item) !== index))];
+    if (duplicates.length > 0) {
+      throw new Error("Form data can't contain duplicates!");
+    }
+
     const memberIDs = [];
     const data = {
       lead: leader,
@@ -141,6 +160,7 @@ const EventDisplay = (props) => {
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               handleEventRegister={handleEventRegister}
+              setIsRegistered={setIsRegistered}
               eventName={eventData.name}
               modalVisible={modalVisible}
               hideModal={hideModal} />
@@ -155,14 +175,17 @@ const EventDisplay = (props) => {
               </Col>
               <Col md={24}>
                 <Row>
-                  <Col lg={16}>
+                  <Col lg={14}>
                     <div className="event-img-container">
                       <img src={eventData.poster} alt={eventName + " poster"}></img>
                     </div>
                   </Col>
-                  <Col lg={8}>
-                    <br />
+                  <Col lg={10}>
                     <div className="events-poc-display" style={{ color: '#00ebff' }}>
+                      {eventData.eventRules ? eventData.eventRules.map((rule, index) => {
+                        return <strong key={index}>{rule}<br /></strong>
+                      }) : null}
+                      <br />
                       {eventData.eventCoordinators.map((c, index) => {
                         return <strong key={index}><Icon type="phone" /> {c}</strong>
                       })}
