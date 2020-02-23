@@ -1,72 +1,74 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Row, Col, Card, Form, Input, Alert, Spin, Icon, Button, Modal } from 'antd';
-import { AuthContext } from '../../context/authContext';
-import { getUserInfo } from '../../firebase/utility';
-import { firestore } from '../../firebase/config';
+// import React, { useState, useEffect, useContext } from 'react';
+// import { Row, Col, Card, Form, Input, Alert, Spin, Icon, Button, Modal } from 'antd';
+// import { AuthContext } from '../../context/authContext';
+// import { getUserInfo } from '../../firebase/utility';
+// import { firestore } from '../../firebase/config';
+import React from 'react';
+import { Row, Col, Card, Icon } from 'antd';
 import ethicalHackingImg from '../../assets/Images/hacking WA.png';
 import './Workshops.css';
 
-const isValid = (department, college, year, phoneNo) => {
-  return (department !== "") && (college !== "") && (year !== "") && (phoneNo !== "");
-}
+// const isValid = (department, college, year, phoneNo) => {
+//   return (department !== "") && (college !== "") && (year !== "") && (phoneNo !== "");
+// }
 
 const Workshops = props => {
-  const [userInfo, setUserInfo] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const [checkoutDisabled, setCheckoutDisabled] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  // const [userInfo, setUserInfo] = useState(null);
+  // const [modalVisible, setModalVisible] = useState(false);
+  // const [isRegistered, setIsRegistered] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [formError, setFormError] = useState(false);
+  // const [checkoutDisabled, setCheckoutDisabled] = useState(false);
+  // const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    firestore.collection('workshopOrders').get()
-      .then(querySnapshot => {
-        querySnapshot.docs.forEach(doc => {
-          const data = doc.data();
-          if (data.userId === currentUser.uid && data.paymentStatus === 'paid') {
-            setIsRegistered(true);
-          }
-        })
-      })
-    getUserInfo(currentUser.uid)
-      .then(data => setUserInfo(data))
-      .catch(err => console.log(err))
-  }, [currentUser.uid])
+  // useEffect(() => {
+    // firestore.collection('workshopOrders').get()
+    //   .then(querySnapshot => {
+    //     querySnapshot.docs.forEach(doc => {
+    //       const data = doc.data();
+    //       if (data.userId === currentUser.uid && data.paymentStatus === 'paid') {
+    //         setIsRegistered(true);
+    //       }
+    //     })
+    //   })
+    // getUserInfo(currentUser.uid)
+    //   .then(data => setUserInfo(data))
+    //   .catch(err => console.log(err))
+  // }, [currentUser.uid])
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    const { username, department, college, year, email, phoneNumber } = event.target.elements;
-    if (isValid(department.value, college.value, year.value, phoneNumber.value)) {
-      setCheckoutDisabled(true);
-      const date = new Date();
-      const data = {
-        date: date.toDateString() + " " + date.toTimeString(),
-        name: username.value,
-        department: department.value,
-        college: college.value,
-        year: year.value,
-        email: email.value,
-        phoneNo: phoneNumber.value,
-        paymentStatus: "manual-payment",
-        userId: currentUser.uid,
-        amount: 700
-      }
-      firestore.collection('workshopOrders').add(data)
-        .then(docRef => {
-          window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/workshops/txn?orderId=${docRef.id}&amount=700`;
-        })
-        .catch(err => console.log(err));
-    } else {
-      setCheckoutDisabled(false);
-      setFormError(true);
-      setIsLoading(false);
-    }
-  }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   const { username, department, college, year, email, phoneNumber } = event.target.elements;
+  //   if (isValid(department.value, college.value, year.value, phoneNumber.value)) {
+  //     setCheckoutDisabled(true);
+  //     const date = new Date();
+  //     const data = {
+  //       date: date.toDateString() + " " + date.toTimeString(),
+  //       name: username.value,
+  //       department: department.value,
+  //       college: college.value,
+  //       year: year.value,
+  //       email: email.value,
+  //       phoneNo: phoneNumber.value,
+  //       paymentStatus: "manual-payment",
+  //       userId: currentUser.uid,
+  //       amount: 700
+  //     }
+  //     firestore.collection('workshopOrders').add(data)
+  //       .then(docRef => {
+  //         window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/workshops/txn?orderId=${docRef.id}&amount=700`;
+  //       })
+  //       .catch(err => console.log(err));
+  //   } else {
+  //     setCheckoutDisabled(false);
+  //     setFormError(true);
+  //     setIsLoading(false);
+  //   }
+  // }
 
-  const showModal = () => setModalVisible(true);
-  const hideModal = () => setModalVisible(false);
+  // const showModal = () => setModalVisible(true);
+  // const hideModal = () => setModalVisible(false);
 
   return (
     <section className="workshops">
@@ -76,7 +78,7 @@ const Workshops = props => {
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color: '#00ebff' }}
                 title="Workshops">
-            <Modal
+            {/* <Modal
               className="registration-modal"
               title="Hacker's Den registration"
               visible={modalVisible}
@@ -146,7 +148,7 @@ const Workshops = props => {
                   </Button>
                 </Form>
               ) : <Spin />}
-            </Modal>
+            </Modal> */}
             <Row>
               <Col lg={12}>
                 <div className="workshop-img-container">
@@ -173,7 +175,10 @@ const Workshops = props => {
                 </p>
                 <br/>
                 <div>
-                  {isRegistered ? (
+                  <span className="btn">
+                    <p style={{ padding: 0, margin: 0 }}>Registrations have closed</p>
+                  </span>
+                  {/* {isRegistered ? (
                     <span className="btn">
                       <p style={{ padding: 0, margin: 0 }}>You've already registered for this workshop</p>
                     </span>
@@ -186,7 +191,7 @@ const Workshops = props => {
                     <span className="btn">
                       <p style={{ padding: 0, margin: 0 }}>Learn More</p>
                     </span>
-                  </a>
+                  </a> */}
                 </div>
               </Col>
             </Row>

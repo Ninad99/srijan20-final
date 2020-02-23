@@ -1,73 +1,76 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../../context/authContext';
-import { Row, Col, Card, Icon, Form, Input, Button, Spin, Alert, Radio, Modal } from 'antd';
-import { getUserInfo } from '../../firebase/utility';
-import { firestore } from '../../firebase/config';
+// import React, { useState, useEffect, useContext } from 'react';
+// import { AuthContext } from '../../context/authContext';
+// import { Row, Col, Card, Icon, Form, Input, Button, Spin, Alert, Radio, Modal } from 'antd';
+// import { getUserInfo } from '../../firebase/utility';
+// import { firestore } from '../../firebase/config';
+
+import React from 'react';
+import { Row, Col, Card } from 'antd';
 import srijanTshirtMockup from '../../assets/Images/srijan_tshirt_mockup.png';
 import './Merchandise.css';
 
-const { confirm } = Modal;
+// const { confirm } = Modal;
 
-const isValid = (department, college, email, year, printName, phoneNo) => {
-  return (department !== "") && (college !== "") && (email !== "") && (year !== "") && (printName !== "") && (phoneNo !== "");
-}
+// const isValid = (department, college, email, year, printName, phoneNo) => {
+//   return (department !== "") && (college !== "") && (email !== "") && (year !== "") && (printName !== "") && (phoneNo !== "");
+// }
 
 const Merchandise = () => {
-  const [userInfo, setUserInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const [checkoutDisabled, setCheckoutDisabled] = useState(false);
-  const [size, setSize] = useState('M');
-  const { currentUser } = useContext(AuthContext);
+  // const [userInfo, setUserInfo] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [formError, setFormError] = useState(false);
+  // const [checkoutDisabled, setCheckoutDisabled] = useState(false);
+  // const [size, setSize] = useState('M');
+  // const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    getUserInfo(currentUser.uid)
-      .then(data => setUserInfo(data))
-      .catch(err => console.log(err))
-  }, [currentUser.uid]);
+  // useEffect(() => {
+  //   getUserInfo(currentUser.uid)
+  //     .then(data => setUserInfo(data))
+  //     .catch(err => console.log(err))
+  // }, [currentUser.uid]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    const { username, department, college, year, email, printName, phoneNumber } = event.target.elements;
-    if (isValid(department.value, college.value, email.value, year.value, printName.value, phoneNumber.value)) {
-      confirm({
-        title: 'Submit order request with given data?',
-        onOk() {
-          setCheckoutDisabled(true);
-          const date = new Date();
-          const data = {
-            date: date.toDateString() + " " + date.toTimeString(),
-            name: username.value,
-            department: department.value,
-            college: college.value,
-            year: year.value,
-            email: email.value,
-            printName: printName.value,
-            phoneNo: phoneNumber.value,
-            paymentStatus: "manual-payment",
-            size: size,
-            userId: currentUser.uid,
-            amount: 300
-          }
-          firestore.collection('orders').add(data)
-            .then(docRef => {
-              setCheckoutDisabled(false);
-              window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
-            })
-            .catch(err => console.log(err));
-        },
-        onCancel() {
-          setCheckoutDisabled(false);
-          setIsLoading(false);
-        },
-      });
-    } else {
-      setCheckoutDisabled(false);
-      setFormError(true);
-      setIsLoading(false);
-    }
-  }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   const { username, department, college, year, email, printName, phoneNumber } = event.target.elements;
+  //   if (isValid(department.value, college.value, email.value, year.value, printName.value, phoneNumber.value)) {
+  //     confirm({
+  //       title: 'Submit order request with given data?',
+  //       onOk() {
+  //         setCheckoutDisabled(true);
+  //         const date = new Date();
+  //         const data = {
+  //           date: date.toDateString() + " " + date.toTimeString(),
+  //           name: username.value,
+  //           department: department.value,
+  //           college: college.value,
+  //           year: year.value,
+  //           email: email.value,
+  //           printName: printName.value,
+  //           phoneNo: phoneNumber.value,
+  //           paymentStatus: "manual-payment",
+  //           size: size,
+  //           userId: currentUser.uid,
+  //           amount: 300
+  //         }
+  //         firestore.collection('orders').add(data)
+  //           .then(docRef => {
+  //             setCheckoutDisabled(false);
+  //             window.location.href = `https://us-central1-srijan20-temp.cloudfunctions.net/app/merch/txn?orderId=${docRef.id}&amount=300`;
+  //           })
+  //           .catch(err => console.log(err));
+  //       },
+  //       onCancel() {
+  //         setCheckoutDisabled(false);
+  //         setIsLoading(false);
+  //       },
+  //     });
+  //   } else {
+  //     setCheckoutDisabled(false);
+  //     setFormError(true);
+  //     setIsLoading(false);
+  //   }
+  // }
 
   return (
   <section className="merchandise">
@@ -86,7 +89,8 @@ const Merchandise = () => {
               <p className="merchandise-amount-sub">For multiple orders, contact 9333324765 (Soumyadip)</p>
             </Col>
             <Col lg={14} className="merchandise-info">
-              {userInfo ? (
+              <strong style={{ color: '#00ebff' }}>The portal for ordering tshirts has closed</strong>
+              {/* {userInfo ? (
                 <Form onSubmit={handleSubmit} layout="horizontal" className="merchandise-form">
                   {formError ? <Alert message="Form fields can't be blank!" type="error" /> : null}
                   <br />
@@ -158,7 +162,7 @@ const Merchandise = () => {
                     Submit&nbsp;&nbsp;{isLoading ? <Spin /> : null}
                   </Button>
                 </Form>
-              ) : <Spin />}
+              ) : <Spin />} */}
             </Col>
           </Row>
         </Card>

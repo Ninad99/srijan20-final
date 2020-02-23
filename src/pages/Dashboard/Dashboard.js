@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
-import { getUserInfo, getUserEvents } from '../../firebase/utility';
+import { getUserEvents } from '../../firebase/utility';
 import { Row, Col, Card, Spin } from 'antd';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import SrijanAppImage from '../../assets/Images/app-min.png';
@@ -10,17 +10,10 @@ const { Meta } = Card;
 
 const Dashboard = props => {
   const { currentUser } = useContext(AuthContext);
-  const [userInfo, setUserInfo] = useState(null);
-  const [userEvents, setUserEvents] = useState([]);
+  const [userEvents, setUserEvents] = useState(null);
 
   useEffect(() => {
-    getUserInfo(currentUser.uid)
-      .then(async userDetails => {
-        setUserInfo(userDetails)
-      })
-      .catch(err => console.log(err));
-    
-      getUserEvents(currentUser.uid)
+    getUserEvents(currentUser.uid)
       .then(async userEvents => {
         const events = [];
         for (const eventId in userEvents) {
@@ -35,7 +28,7 @@ const Dashboard = props => {
     <section className="dashboard">
       <Row>
         <Col md={24} className="flex-container" style={{ padding: '.5rem', textAlign: 'center'}}>
-        {userInfo ? (
+        {userEvents ? (
           <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none' }}
@@ -51,15 +44,8 @@ const Dashboard = props => {
                   <Card headStyle={{backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                         bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none', color:'#00ebff' }}
                         style={{ width: '200px',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color:'#00ebff' }}  
-                        size="small" title={ev.event}
-                        cover={
-                          <div style={{ width: '100%', padding: 0 }}>
-                            <img
-                              alt="example"
-                              src={ev.poster ? ev.poster : "https://robohash.org/" + ev.code}
-                              style={{ width: '100%', height: '40%' }}/>
-                          </div>
-                        }>
+                        size="small"
+                        title={ev.event}>
                     <Meta
                         title={<span style={{ color: "#00ebff", textTransform: 'uppercase' }}>Team: {ev.team}</span>}/>
                   </Card>
@@ -77,7 +63,7 @@ const Dashboard = props => {
                 headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
                 bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
-            <DoughnutChart data={[3, 1, 4, 1, 1, 3]} labels={['Coding', 'Gaming', 'Robotics', 'Photography', 'Quiz', 'Misc']} />
+            <DoughnutChart data={[3, 4, 3, 1, 2, 4, 2]} labels={['Coding', 'Gaming', 'Robotics', 'Photography', 'Quiz', 'Misc', 'Fun']} />
           </Card>
         </Col>
         <Col lg={12} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
