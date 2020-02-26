@@ -12,6 +12,7 @@ const Events = props => {
       .then(data => {
         const events = [];
         for (const eventId in data) {
+          if (eventId === "024_f5") { continue; }
           events.push(data[eventId]);
         }
         setFetchedEvents(events);
