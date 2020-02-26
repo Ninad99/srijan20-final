@@ -202,6 +202,12 @@ const EventDisplay = (props) => {
                             <span className="btn">
                               <p style={{ padding: 0, margin: 0 }}>Registration for this event hasn't started yet</p>
                             </span>
+                          ) : eventData.reg_link ? (
+                            <a href={eventData.reg_link} target="_blank_">
+                              <span className="btn">
+                                <p style={{ padding: 0, margin: 0 }}>Register</p>
+                              </span>
+                            </a>
                           ) : (
                             <span className="btn" onClick={showModal}>
                               <p style={{ padding: 0, margin: 0 }}>Register</p>
