@@ -87,6 +87,7 @@ const EventRegistrationForm = props => {
       <Form.Item label="Team member 2 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
           required={minMembers > 1}
+          disabled={maxMembers < 2}
           className="event-reg-input"
           name="member2"
           type="email"
@@ -96,6 +97,7 @@ const EventRegistrationForm = props => {
       <Form.Item label="Team member 3 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
           required={minMembers > 2}
+          disabled={maxMembers < 3}
           className="event-reg-input"
           name="member3"
           type="email"
@@ -104,6 +106,7 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team member 4 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
+          required={minMembers > 3}
           disabled={maxMembers < 4}
           className="event-reg-input"
           name="member4"
@@ -113,6 +116,7 @@ const EventRegistrationForm = props => {
       </Form.Item>
       <Form.Item label="Team member 5 email" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
         <Input
+          required={minMembers > 4}
           disabled={maxMembers < 5}
           className="event-reg-input"
           name="member5"
