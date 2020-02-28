@@ -22,3 +22,8 @@
   text-align: left;
   width: 100%;
 }
+
+.f5-registration-modal .f5-reg-iframe {
+  width: 100%;
+  min-height: 70vh;
+}
