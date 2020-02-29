@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Row, Col, Card, Icon, Modal, Button, Spin } from 'antd';
+import React from 'react';
+import { Row, Col, Card, Icon } from 'antd';
 import F5PosterOne from '../../assets/Images/F5_poster_1.jpeg';
 import F5PosterTwo from '../../assets/Images/f5_poster_2-min.jpeg';
 import './Talks.css';
 
 const Talks = props => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalLoading, setModalLoading] = useState(true);
-  const showModal = () => setModalVisible(true);
-  const hideModal = () => setModalVisible(false);
+  // const [modalVisible, setModalVisible] = useState(false);
+  // const [modalLoading, setModalLoading] = useState(true);
+  // const showModal = () => setModalVisible(true);
+  // const hideModal = () => setModalVisible(false);
 
   return (
     <section className="talks">
@@ -18,7 +18,7 @@ const Talks = props => {
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color: '#00ebff' }}
                 title="F5">
-            <Modal 
+            {/* <Modal 
               className="f5-registration-modal"
               title="F5 registration"
               visible={modalVisible}
@@ -38,7 +38,7 @@ const Talks = props => {
                 marginHeight="0"
                 marginWidth="0"
                 onLoad={e => setModalLoading(false)}>Loading…</iframe>
-            </Modal>
+            </Modal> */}
             <Row>
               <Col lg={14}>
                 <div className="talks-img-container">
@@ -88,9 +88,6 @@ const Talks = props => {
                 #Srijan_20
                 #tech_enthusiasts_assemble
                 </p>
-                <span className="btn" onClick={showModal}>
-                  <p style={{ padding: 0, margin: 0 }}>Register</p>
-                </span>
               </Col>
             </Row>
           </Card>
