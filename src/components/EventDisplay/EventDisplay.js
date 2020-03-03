@@ -20,6 +20,9 @@ const EventDisplay = (props) => {
   useEffect(() => {
     getEventData(eventName)
       .then(data => {
+        if (data.note) {
+          data.eventNote = data.note.split('\n');
+        }
         if (data.poc) {
           data.eventCoordinators = data.poc.split("\n");
         }
@@ -192,6 +195,9 @@ const EventDisplay = (props) => {
                         return <strong key={index}><Icon type="phone" /> {c}</strong>
                       }) : null}
                       <br />
+                      {eventData.eventNote ? eventData.eventNote.map((note, index) => {
+                        return <strong key={index}>{note}<br /></strong>
+                      }) : null}
                       {isRegistered ? (
                         <span className="btn">
                           <p style={{ padding: 0, margin: 0 }}>You've registered for this event</p>
