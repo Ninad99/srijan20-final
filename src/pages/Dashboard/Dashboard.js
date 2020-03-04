@@ -5,6 +5,10 @@ import { Row, Col, Card, Spin } from 'antd';
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart';
 import SrijanAppImage from '../../assets/Images/app-min.png';
 import GooglePlayBadge from '../../assets/Images/google-play-badge.png';
+import scheduleOne from '../../assets/Images/SCH1-min.jpg';
+import scheduleTwo from '../../assets/Images/sch-min.jpg';
+import scheduleThree from '../../assets/Images/sch3-min.jpg';
+import scheduleFour from '../../assets/Images/sch4-min.jpg';
 import './Dashboard.css';
 const { Meta } = Card;
 
@@ -55,6 +59,37 @@ const Dashboard = props => {
             )}
           </Card>
           ) : <Spin />}
+        </Col>
+      </Row>
+      <Row>
+        <Col lg={24} className="flex-container" style={{ padding: '.5rem', textAlign: 'center' }}>
+          <Card title="Srijan 20 schedule"
+                headStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.3)', borderBottom: '2px solid #00ebff', color: '#00ebff' }}
+                bodyStyle={{ backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
+                style={{ width: '100%', backgroundColor: 'transparent', border: 'none' }}>
+            <Row>
+              <Col lg={12}>
+                <div className="dashboard-img-container">
+                  <img alt="Srijan 20 schedule" src={scheduleOne} />
+                </div>
+              </Col>
+              <Col lg={12}>
+                <div className="dashboard-img-container">
+                  <img alt="Srijan 20 schedule" src={scheduleTwo} />
+                </div>
+              </Col>
+              <Col lg={12}>
+                <div className="dashboard-img-container">
+                  <img alt="Srijan 20 schedule" src={scheduleThree} />
+                </div>
+              </Col>
+              <Col lg={12}>
+                <div className="dashboard-img-container">
+                  <img alt="Srijan 20 schedule" src={scheduleFour} />
+                </div>
+              </Col>
+            </Row>
+          </Card>
         </Col>
       </Row>
       <Row >

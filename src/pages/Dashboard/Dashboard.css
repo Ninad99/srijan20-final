@@ -57,3 +57,18 @@
 .dashboard-app-section .dashboard-app-img-container img {
   width: 100%;
 }
+
+.dashboard-img-container {
+  width: 100%;
+  padding: .5rem;
+}
+
+.dashboard-img-container img {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-img-container {
+    padding: .5rem 0;
+  }
+}
