@@ -2,14 +2,10 @@ import React from 'react';
 import { Row, Col, Card, Icon } from 'antd';
 import F5PosterOne from '../../assets/Images/F5_poster_1.jpeg';
 import F5PosterTwo from '../../assets/Images/f5_poster_2-min.jpeg';
+import F5PosterThree from '../../assets/Images/F5_poster_3.jpeg';
 import './Talks.css';
 
 const Talks = props => {
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const [modalLoading, setModalLoading] = useState(true);
-  // const showModal = () => setModalVisible(true);
-  // const hideModal = () => setModalVisible(false);
-
   return (
     <section className="talks">
       <Row>
@@ -18,27 +14,6 @@ const Talks = props => {
                 bodyStyle={{backgroundColor: 'rgba(22, 104, 159, 0.2)', border: 'none' }}
                 style={{ width: '100%',backgroundColor: 'rgba(0,0,0,0)', border: 'none', color: '#00ebff' }}
                 title="F5">
-            {/* <Modal 
-              className="f5-registration-modal"
-              title="F5 registration"
-              visible={modalVisible}
-              onOk={() => console.log('ok')}
-              onCancel={hideModal}
-              footer={[
-                <Button key="back" type="primary" onClick={hideModal}>
-                  Go back
-                </Button>
-              ]}>
-              {modalLoading ? <Spin /> : null}
-              <iframe
-                className="f5-reg-iframe"
-                title="gaurav-sen-talk"
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdjlbe1Fo4vUznJjN5M55Ou2_8E3MlPZcQNOxTBHXUuCDUUHQ/viewform?embedded=true"
-                frameBorder="0"
-                marginHeight="0"
-                marginWidth="0"
-                onLoad={e => setModalLoading(false)}>Loading…</iframe>
-            </Modal> */}
             <Row>
               <Col lg={14}>
                 <div className="talks-img-container">
@@ -87,6 +62,26 @@ const Talks = props => {
                 <br /><br />
                 #Srijan_20
                 #tech_enthusiasts_assemble
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={14}>
+                <div className="talks-img-container">
+                  <img src={F5PosterThree} alt="F5 Three" />
+                </div>
+              </Col>
+              <Col lg={10} className="talks-info">
+                <h5 className="talks-subtitle">
+                  <Icon type="calendar" /> Date: 5th March<br />
+                  <Icon type="phone" /> Soham Das (6296709930)&nbsp;&nbsp;|&nbsp;&nbsp;Soumya Deep Roy (6291352405)
+                </h5>
+                <p>
+                  With less than 24 hours to go for the inaugural session of Srijan'20, we unveil the final speaker of our session: Rwitobroto Mukherjee.
+                  <br /><br />
+                  A theatre artist from a very young age, he has transitioned effortlessly to the big screen with movies like Open Tee Bioscope,Generation Ami and most recently as Khoka in Dwitiyo Purush.
+                  <br /><br />
+                  Watch him speak about how he forayed into the world of theatre and films and much more!
                 </p>
               </Col>
             </Row>
