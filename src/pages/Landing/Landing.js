@@ -18,7 +18,7 @@ const { Title } = Typography;
 
 const Landing = props => {
   const { isAuthenticated, username } = props;
-  const [showForm, setShowForm] = useState(null);
+  const [showForm, setShowForm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -29,6 +29,7 @@ const Landing = props => {
           title="Prelims results"
           visible={modalVisible}
           onOk={() => setModalVisible(false)}
+          onCancel={() => setModalVisible(false)}
           footer={[
             <Button key="back" type="primary" onClick={() => setModalVisible(false)}>
               Go back
@@ -108,9 +109,11 @@ const Landing = props => {
             )}
           </div>
         </div>) : null}
+      {showForm === '' ? (
         <span className="btn" onClick={e => setModalVisible(true)}>
           <p style={{ padding: 0, margin: 0 }}>Prelims results</p>
         </span>
+      ) : null}
       {showForm === 'login' ? <LoginForm setShowForm={setShowForm} /> : null }
       {showForm === 'register' ? <RegisterForm setShowForm={setShowForm} /> : null }
       {showForm === 'forgot-password' ? <PasswordResetForm /> : null}
