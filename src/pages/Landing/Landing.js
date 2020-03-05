@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Typography, Modal, Button } from 'antd';
 import fgimg from '../../assets/Images/fg-landing.png';
 import srijanLogo from '../../assets/Images/srijan_logo_white.png';
 import JULogo from '../../assets/Images/Jadavpur_University_Logo.svg';
@@ -11,6 +11,8 @@ import LoginForm from '../../components/Login/Login';
 import RegisterForm from '../../components/Register/Register';
 import PreLoader from '../../components/PreLoader/PreLoader';
 import PasswordResetForm from '../../components/PasswordResetForm/PasswordResetForm';
+import h42result from '../../assets/Images/h42 prelims result.jpg';
+import ptbresult from '../../assets/Images/ptb prelims result.jpg';
 
 const { Title } = Typography;
 
@@ -18,10 +20,29 @@ const Landing = props => {
   const { isAuthenticated, username } = props;
   const [showForm, setShowForm] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <section className="landing">
       <PreLoader setIsLoading={setIsLoading}/>
+      <Modal
+          title="Prelims results"
+          visible={modalVisible}
+          onOk={() => setModalVisible(false)}
+          footer={[
+            <Button key="back" type="primary" onClick={() => setModalVisible(false)}>
+              Go back
+            </Button>
+          ]}>
+          <div style={{ width: '100%', marginBottom: '.75rem' }}>
+            <h4>H42 prelims result</h4>
+            <img src={h42result} alt="h42 prelims result" style={{ width: '100%' }}/>
+          </div>
+          <div style={{ width: '100%' }}>
+            <h4>Pass the baton prelims result</h4>
+            <img src={ptbresult} alt="ptb prelims result" style={{ width: '100%' }}/>
+          </div>
+      </Modal>
       <Particles className="particles"
         params={{
           "particles": {
@@ -87,6 +108,9 @@ const Landing = props => {
             )}
           </div>
         </div>) : null}
+        <span className="btn" onClick={e => setModalVisible(true)}>
+          <p style={{ padding: 0, margin: 0 }}>Prelims results</p>
+        </span>
       {showForm === 'login' ? <LoginForm setShowForm={setShowForm} /> : null }
       {showForm === 'register' ? <RegisterForm setShowForm={setShowForm} /> : null }
       {showForm === 'forgot-password' ? <PasswordResetForm /> : null}
