@@ -206,7 +206,7 @@ const EventDisplay = (props) => {
                         <div>
                           {eventData.maxts === 0 ? (
                             <span className="btn">
-                              <p style={{ padding: 0, margin: 0 }}>Registration for this event hasn't started yet</p>
+                              <p style={{ padding: 0, margin: 0 }}>Registration closed</p>
                             </span>
                           ) : eventData.reg_link ? (
                             <a href={eventData.reg_link} target="_blank_">
