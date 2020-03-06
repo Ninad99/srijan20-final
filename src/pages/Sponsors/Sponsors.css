@@ -5,3 +5,25 @@
 .sponsors .sponsor-card h3 {
   color: #00ebff;
 }
+
+.sponsors strong > * {
+  color: #00ebff;
+}
+
+.sponsors .sponsor-img-container {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsors .sponsor-img-container img {
+  width: 45%;
+  height: auto;
+}
+
+@media screen and (max-width: 768px) { 
+  .sponsors .sponsor-img-container img {
+    width: 55%;
+  }
+}
