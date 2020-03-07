@@ -5,12 +5,12 @@ import clarion from '../../assets/Images/Sponsors/cl.png';
 import hyundai from '../../assets/Images/Sponsors/1280px-Hyundai_Motor_Company_logo.svg.png';
 import webel from '../../assets/Images/Sponsors/Webel Fuji Logo.png';
 import gail from '../../assets/Images/Sponsors/1200px-GAIL_Logo.svg.png';
-import brandtree from '../../assets/Images/Sponsors/Brandtree Logo-min.jpg';
 import erudite from '../../assets/Images/Sponsors/Erudite Logo.jpg';
 import tinder from '../../assets/Images/Sponsors/tinder-R-red-RGB.png';
 import zeroDSecurity from '../../assets/Images/Sponsors/ZDS Icon.jpeg';
 import atkt from '../../assets/Images/Sponsors/ATKT Logo 2.png';
 import myprintstory from '../../assets/Images/Sponsors/MY PRINT STORY LOGO-min.jpg'
+import vani from '../../assets/Images/Sponsors/vani.jpg';
 import './Sponsors.css';
 
 const Sponsors = props => {
@@ -37,6 +37,11 @@ const Sponsors = props => {
                       </g>
                     </g>
                   </svg>
+                </a>
+                <a href="https://gailonline.com/home.html" target="_blank" rel="noopener noreferrer">
+                  <div className="sponsor-img-container">
+                    <img src={gail} alt="Gail"/>
+                  </div>
                 </a>
               </Col>
               <strong><h3>Gaming Partners</h3></strong>
@@ -72,16 +77,18 @@ const Sponsors = props => {
               </Col>
               <strong><h3>Other sponsors</h3></strong>
               <Col md={8} style={{ padding: '1rem 0' }}>
-                <a href="https://gailonline.com/home.html" target="_blank" rel="noopener noreferrer">
+                <a href="http://myprintstory.com/" target="_blank" rel="noopener noreferrer">
                   <div className="sponsor-img-container">
-                    <img src={gail} alt="Gail"/>
+                    <img src={myprintstory} alt="My Print Story"/>
                   </div>
                 </a>
               </Col>
               <Col md={8} style={{ padding: '1rem 0' }}>
-                <div className="sponsor-img-container">
-                  <img src={brandtree} alt="Brandtree"/>
-                </div>
+                <a href="https://atkt.in/" target="_blank" rel="noopener noreferrer">
+                  <div className="sponsor-img-container">
+                    <img src={atkt} alt="atkt"/>
+                  </div>
+                </a>
               </Col>
               <Col md={8} style={{ padding: '1rem 0' }}>
                 <a href="https://www.facebook.com/EruditeEducation" target="_blank" rel="noopener noreferrer">
@@ -100,21 +107,14 @@ const Sponsors = props => {
               <Col md={8} style={{ padding: '1rem 0' }}>
                 <a href="https://www.zerodollarsecurity.in/" target="_blank" rel="noopener noreferrer">
                   <div className="sponsor-img-container">
-                    <img src={zeroDSecurity} alt="Zero D Security"/>
+                    <img src={zeroDSecurity} alt="Zero Dollar Security"/>
                   </div>
                 </a>
               </Col>
               <Col md={8} style={{ padding: '1rem 0' }}>
-                <a href="https://atkt.in/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/vanikolkata/" target="_blank" rel="noopener noreferrer">
                   <div className="sponsor-img-container">
-                    <img src={atkt} alt="atkt"/>
-                  </div>
-                </a>
-              </Col>
-              <Col md={8} style={{ padding: '1rem 0' }}>
-                <a href="http://myprintstory.com/" target="_blank" rel="noopener noreferrer">
-                  <div className="sponsor-img-container">
-                    <img src={myprintstory} alt="My Print Story"/>
+                    <img src={vani} alt="Vani Institute"/>
                   </div>
                 </a>
               </Col>
